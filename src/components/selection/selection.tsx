@@ -31,7 +31,6 @@ function Selection({ languages }: Props) {
       ? { background: 'rgb(139,157,195)' }
       : undefined;
 
-
   return (
     <div className={css(styles.container)}>
       {
