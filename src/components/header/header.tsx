@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   logo: {
+    fontFamily: 'Impact',
     height: '24px',
     margin: '4px',
     paddingLeft: '5vh',
@@ -18,16 +19,16 @@ const styles = StyleSheet.create({
   },
 });
 
-class Form extends Component {
+// programming languages compare
+const LOGO = 'PLR';
 
-  render() {
+function Header() {
 
-    return (
-      <div className={css(styles.container)}>
-        <div className={css(styles.logo)}>ЦФТ</div>
-      </div>
-    );
-  }
+  return (
+    <div className={css(styles.container)}>
+      <div className={css(styles.logo)}>{LOGO}</div>
+    </div>
+  );
 }
 
-export default Form;
+export default Header;

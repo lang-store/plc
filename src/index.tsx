@@ -2,7 +2,7 @@ import React, { ComponentType } from 'react';
 import ReactDOM from 'react-dom';
 
 
-import Form from './form';
+import Main from './components/main';
 
 function render(Component: ComponentType<{}>) {
   ReactDOM.render(
@@ -11,7 +11,7 @@ function render(Component: ComponentType<{}>) {
   );
 }
 
-render(Form);
+render(Main);
 
 if (module.hot) {
   module.hot.accept(['./form'], () => render(require('./form').default));
