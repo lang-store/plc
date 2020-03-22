@@ -14,5 +14,5 @@ function render(Component: ComponentType<{}>) {
 render(Main);
 
 if (module.hot) {
-  module.hot.accept(['./form'], () => render(require('./form').default));
+  module.hot.accept(['./components/main'], () => render(require('./components/main').default));
 }
