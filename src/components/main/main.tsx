@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '30px',
   },
   vs: {
     fontFamily: 'Impact',
