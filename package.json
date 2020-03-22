@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "aphrodite": "^2.4.0",
     "react": "^16.9.23",
     "react-dom": "^16.9.23",
     "react-hot-loader": "^4.12.20"
