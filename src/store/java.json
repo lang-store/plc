@@ -2,30 +2,32 @@
     "name": "Java",
     "logo": "https://img.icons8.com/color/48/000000/java-coffee-cup-logo.png",
     "compiler": "https://www.jdoodle.com/online-java-compiler/",
-    "core": [
-        ["byte", "int", "float", "boolean", "char"],
-        ["=", "!="],
-        ["new", "sizeof"], ["Ключевые слова"], ["int[]", "array"]
-    ],
-    "expansion": [
-        ["short", "long", "double"],
-        ["+", "-", "*", "/", "%", "++", "--", "Побитовые операции"],
-        ["try – catch"],
-        ["if - else"],
-        ["int[][]", "array", "enum", "collection", "set", "list"]
-    ],
-    "limit": [
-        ["null", "нет определения", "не соответствует типу данных"],
-        ["==", "<", ">", "<=", ">=", "||", "&&"],
-        ["Выход за пределы", "Не существует объекта"],
-        ["switch - case"],
-        ["Выход за пределы массива"]
-    ],
-    "union": [
-        ["Ссылочные типы"],
-        [],
-        [],
-        ["for", "foreach", "while", "do - while"],
-        ["Стандартные функции ввода-вывода"]
-    ]
+    "data": {
+        "core": [
+            ["byte", "int", "float", "boolean", "char"],
+            ["=", "!="],
+            ["new", "sizeof"], ["Ключевые слова"], ["int[]", "array"]
+        ],
+        "expansion": [
+            ["short", "long", "double"],
+            ["+", "-", "*", "/", "%", "++", "--", "Побитовые операции"],
+            ["try – catch"],
+            ["if - else"],
+            ["int[][]", "array", "enum", "collection", "set", "list"]
+        ],
+        "limit": [
+            ["null", "нет определения", "не соответствует типу данных"],
+            ["==", "<", ">", "<=", ">=", "||", "&&"],
+            ["Выход за пределы", "Не существует объекта"],
+            ["switch - case"],
+            ["Выход за пределы массива"]
+        ],
+        "union": [
+            ["Ссылочные типы"],
+            [],
+            [],
+            ["for", "foreach", "while", "do - while"],
+            ["Стандартные функции ввода-вывода"]
+        ]
+    }
 }

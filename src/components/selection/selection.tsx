@@ -19,9 +19,10 @@ const styles = StyleSheet.create({
 
 interface Props {
   languages: JsonStory[];
+  onSelect: (language: JsonStory) => void;
 }
 
-function Selection({ languages }: Props) {
+function Selection({ languages, onSelect }: Props) {
   const [selectedLang, select] = useState<JsonStory>();
 
   const getItemStyle = (lang: JsonStory) =>
@@ -37,7 +38,7 @@ function Selection({ languages }: Props) {
             <div
               style={getItemStyle(lang)}
               className={css(styles.item)}
-              onClick={() => select(lang)}
+              onClick={() => { select(lang); onSelect(lang); }}
             >
               {lang.name}
             </div>
