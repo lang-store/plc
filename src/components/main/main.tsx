@@ -4,6 +4,9 @@ import { StyleSheet, css } from 'aphrodite';
 import Header from '../header';
 import Selection from '../selection';
 
+import Java from '../../store/java.json';
+import { JsonStory } from '../../models/models';
+
 const styles = StyleSheet.create({
   main: {
   },
@@ -20,7 +23,9 @@ const styles = StyleSheet.create({
     color: 'rgb(66, 103, 178)',
   }
 });
-const TEST_LANGUAGES = ['C', 'C++', 'D', 'Java', 'Javascript', 'Go', 'C#', 'F#', 'A', 'B', 'Scala'];
+
+
+const TEST_LANGUAGES: JsonStory[] = [Java];
 
 function Main() {
 

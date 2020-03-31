@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { JsonStory } from '../../models/models';
 
 
 const styles = StyleSheet.create({
@@ -13,20 +14,17 @@ const styles = StyleSheet.create({
     border: '1px solid rgb(139,157,195)',
     padding: '5px',
     cursor: 'pointer',
-    // ':hover': {
-    //   background: 'rgb(223,227,238)',
-    // }
   },
 });
 
 interface Props {
-  languages: string[];
+  languages: JsonStory[];
 }
 
 function Selection({ languages }: Props) {
-  const [selectedLang, select] = useState<string>();
+  const [selectedLang, select] = useState<JsonStory>();
 
-  const getItemStyle = (lang: string) =>
+  const getItemStyle = (lang: JsonStory) =>
     selectedLang === lang
       ? { background: 'rgb(139,157,195)' }
       : undefined;
@@ -41,7 +39,7 @@ function Selection({ languages }: Props) {
               className={css(styles.item)}
               onClick={() => select(lang)}
             >
-              {lang}
+              {lang.name}
             </div>
           )
       }
