@@ -77,7 +77,7 @@ function CompareRow({ languageA, languageB, title }: Props) {
         <div className={css(styles.row, styles.secondRow, styles.hover)}>
           <div className={css(styles.cell)}>{languageB.name}</div>
           {
-            languageA.row.map(item => <div className={css(styles.cell)}>{item.join(', ')}</div>)
+            languageB.row.map(item => <div className={css(styles.cell)}>{item.join(', ')}</div>)
           }
         </div>
       </div>

@@ -6,9 +6,12 @@ import Selection from '../selection';
 import DifficultyMatrix from '../difficulty-matrix';
 
 
-import Java from '../../store/java.json';
 import { JsonStory } from '../../models/models';
 import CompareRow from '../compare-row';
+
+
+import Java from '../../store/java.json';
+import Lisp from '../../store/lisp.json';
 
 const styles = StyleSheet.create({
   main: {
@@ -24,7 +27,15 @@ const styles = StyleSheet.create({
     padding: '10px',
     fontSize: '50px',
     color: 'rgb(66, 103, 178)',
-  }
+  },
+  label: {
+    padding: '10px',
+    fontSize: '30px',
+    color: 'rgb(66, 103, 178)',
+  },
+  container: {
+    textAlign: 'center',
+  },
 });
 
 const ROWS = {
@@ -36,7 +47,7 @@ const ROWS = {
 
 // Представление результатов сравнения понятийной сложности определений языков
 
-const TEST_LANGUAGES: JsonStory[] = [Java as JsonStory];
+const TEST_LANGUAGES: JsonStory[] = [Java, Lisp];
 
 function Main() {
   const [languageA, setLanguageA] = useState<JsonStory>();
@@ -51,13 +62,14 @@ function Main() {
         <Selection onSelect={setLanguageB} languages={TEST_LANGUAGES} />
       </div>
       {
-        languageA && languageB && <div>
+        languageA && languageB &&
+        <div className={css(styles.container)}>
 
+          <span className={css(styles.label)}>{`Представление результатов сравнения понятийной сложности определений языков ${languageA.name} и ${languageB.name}`}</span>
           <div className={css(styles.compare)}>
-            <DifficultyMatrix language={languageA} />
-            <span className={css(styles.vs)}></span>
-            <DifficultyMatrix language={languageB} />
+            <DifficultyMatrix languageA={languageA} languageB={languageB} />
           </div>
+
           {
             Object.entries(ROWS).map(
               ([key, value]) =>
