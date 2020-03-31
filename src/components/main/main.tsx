@@ -3,6 +3,8 @@ import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
 import Selection from '../selection';
+import DifficultyMatrix from '../difficulty-matrix';
+
 
 import Java from '../../store/java.json';
 import { JsonStory } from '../../models/models';
@@ -32,7 +34,7 @@ const ROWS = {
   'union': 'Общность, Практичность (U)',
 };
 
-
+// Представление результатов сравнения понятийной сложности определений языков
 
 const TEST_LANGUAGES: JsonStory[] = [Java as JsonStory];
 
@@ -49,14 +51,24 @@ function Main() {
         <Selection onSelect={setLanguageB} languages={TEST_LANGUAGES} />
       </div>
       {
-       languageA && languageB && Object.entries(ROWS).map(
-          ([key, value]) =>
-            <CompareRow
-              title={value}
-              languageA={{ name: languageA.name, row: languageA.data[key] }}
-              languageB={{ name: languageB.name, row: languageB.data[key] }}
-            />
-        )
+        languageA && languageB && <div>
+
+          <div className={css(styles.compare)}>
+            <DifficultyMatrix language={languageA} />
+            <span className={css(styles.vs)}></span>
+            <DifficultyMatrix language={languageB} />
+          </div>
+          {
+            Object.entries(ROWS).map(
+              ([key, value]) =>
+                <CompareRow
+                  title={value}
+                  languageA={{ name: languageA.name, row: languageA.data[key] }}
+                  languageB={{ name: languageB.name, row: languageB.data[key] }}
+                />
+            )
+          }
+        </div>
       }
     </div>
   );
