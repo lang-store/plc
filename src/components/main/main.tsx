@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+const { Chart } = require('react-google-charts');
 
 import Header from '../header';
 import Selection from '../selection';
@@ -30,13 +31,23 @@ const styles = StyleSheet.create({
   },
   label: {
     padding: '10px',
+    margin: '10px',
     fontSize: '30px',
     color: 'rgb(66, 103, 178)',
   },
   container: {
     textAlign: 'center',
   },
+  charts: {
+    padding: '100px',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
+
 
 const ROWS = {
   'core': 'Ядро (К)',
@@ -45,13 +56,21 @@ const ROWS = {
   'union': 'Общность, Практичность (U)',
 };
 
-// Представление результатов сравнения понятийной сложности определений языков
+
+const COLUMN_NAMES = ['Константы (V)', 'Вычисления (E)', 'Память (M)', 'Управление (C)', 'Структуры (S)'];
 
 const TEST_LANGUAGES: JsonStory[] = [Java, Lisp];
-
 function Main() {
   const [languageA, setLanguageA] = useState<JsonStory>();
   const [languageB, setLanguageB] = useState<JsonStory>();
+
+  const createData = (key: string, languages: JsonStory[]) => {
+    if (!languageA || !languageB) {
+      return [];
+    }
+
+    return COLUMN_NAMES.map((column, i) => [column, ...languages.map(lang => lang.data[key][i].length)]);
+  };
 
   return (
     <div className={css(styles.main)}>
@@ -61,9 +80,34 @@ function Main() {
         <span className={css(styles.vs)}>VS</span>
         <Selection onSelect={setLanguageB} languages={TEST_LANGUAGES} />
       </div>
+
       {
         languageA && languageB &&
         <div className={css(styles.container)}>
+
+          <span className={css(styles.label)}>Визуальные формы представления результатов сравнения сложности ЯП</span>
+          <div className={css(styles.charts)}>
+            {
+              Object.entries(ROWS).map(
+                ([key, value]) =>
+                  <Chart
+                    width={'700px'}
+                    height={'400px'}
+                    chartType="Bar"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                      ['', languageA.name, languageB.name],
+                      ...createData(key, [languageA, languageB])
+                    ]}
+                    options={{
+                      chart: {
+                        title: value,
+                      },
+                    }}
+                  />
+              )
+            }
+          </div>
 
           <span className={css(styles.label)}>{`Представление результатов сравнения понятийной сложности определений языков ${languageA.name} и ${languageB.name}`}</span>
           <div className={css(styles.compare)}>
