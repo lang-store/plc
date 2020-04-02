@@ -14,7 +14,7 @@
     "react": "^16.9.23",
     "react-dom": "^16.9.23",
     "react-google-charts": "^3.0.15",
-    "react-hot-loader": "^4.12.20",
+    "react-hot-loader": "^4.12.20"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^16.9.23",
