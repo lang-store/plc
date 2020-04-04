@@ -22,11 +22,15 @@ const styles = StyleSheet.create({
 // programming languages compare
 const LOGO = 'PLR';
 
-function Header() {
+interface Props {
+  logo: string;
+}
+
+function Header({ logo }: Props) {
 
   return (
     <div className={css(styles.container)}>
-      <div className={css(styles.logo)}>{LOGO}</div>
+      <div className={css(styles.logo)}>{logo}</div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ const { Chart } = require('react-google-charts');
 
 import Spinner from '../../tools/spinner';
 import { JsonStory } from '../../../models/models';
+import { COLUMN_NAMES, ROWS } from '../../../models/metadata';
 
 
 const styles = StyleSheet.create({
@@ -23,14 +24,6 @@ interface Props {
   languageB: JsonStory;
 }
 
-const ROWS = {
-  'core': 'Ядро (К)',
-  'expansion': 'Специальные функции (Р)',
-  'limit': 'Ограничения (В)',
-  'union': 'Общность, Практичность (U)',
-};
-const COLUMN_NAMES = ['Константы (V)', 'Вычисления (E)', 'Память (M)', 'Управление (C)', 'Структуры (S)'];
-
 function Charts({ languageA, languageB }: Props) {
 
   const createData = (key: string, languages: JsonStory[]) => {
@@ -40,7 +33,6 @@ function Charts({ languageA, languageB }: Props) {
 
     return COLUMN_NAMES.map((column, i) => [column, ...languages.map(lang => lang.data[key][i].length)]);
   };
-
 
   return (
     <div className={css(styles.charts)}>
