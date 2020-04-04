@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 const { Chart } = require('react-google-charts');
 
+import Spinner from '../spinner';
 import { JsonStory } from '../../models/models';
 
 
@@ -50,7 +51,7 @@ function Charts({ languageA, languageB }: Props) {
               width={'700px'}
               height={'400px'}
               chartType="Bar"
-              loader={<div className={css(styles.loader)}></div>}
+              loader={<Spinner />}
               data={[
                 ['', languageA.name, languageB.name],
                 ...createData(key, [languageA, languageB])

@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
 });
 
 const Spinner = () => <div className={css(styles.loader)}></div>;
-export default Selection;
+export default Spinner;
