@@ -12,6 +12,10 @@ export interface JsonStory {
     };
 }
 
+export interface Core {
+    showCompareLanguagesFrame: () => void;
+}
+
 export class Frame {
 }
 
