@@ -4,13 +4,12 @@ import { StyleSheet, css } from 'aphrodite';
 import Header from '../header';
 import Selection from '../selection';
 import DifficultyMatrix from '../difficulty-matrix';
+import CompareRow from '../compare-row';
 
 import { JsonStory } from '../../models/models';
-import CompareRow from '../compare-row';
 import Charts from '../charts';
 
-import Java from '../../store/java.json';
-import Lisp from '../../store/lisp.json';
+import { TEST_LANGUAGES, ROWS } from '../../models/metadata';
 
 const styles = StyleSheet.create({
   main: {
@@ -46,15 +45,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
-const ROWS = {
-  'core': 'Ядро (К)',
-  'expansion': 'Специальные функции (Р)',
-  'limit': 'Ограничения (В)',
-  'union': 'Общность, Практичность (U)',
-};
-
-const TEST_LANGUAGES: JsonStory[] = [Java, Lisp];
 function Main() {
   const [languageA, setLanguageA] = useState<JsonStory>();
   const [languageB, setLanguageB] = useState<JsonStory>();
