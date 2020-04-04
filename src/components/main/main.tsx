@@ -35,7 +35,7 @@ const renderFrames = (frame: Frame) => {
 const MIN_FRAMES_LENGTH = 1;
 
 function Main() {
-  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES), new CompareFrame(TEST_LANGUAGES)]);
+  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES)]);
 
   const removeLastFrame = () => {
     const newFrames = [...frames];
