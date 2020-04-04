@@ -64,7 +64,7 @@ function Main() {
 
           <span className={css(styles.label)}>Визуальные формы представления результатов сравнения сложности ЯП</span>
           <div className={css(styles.charts)}>
-            <Charts languageA={languageA} languageB={languageA} />
+            <Charts languageA={languageA} languageB={languageB} />
           </div>
 
           <span className={css(styles.label)}>{`Представление результатов сравнения понятийной сложности определений языков ${languageA.name} и ${languageB.name}`}</span>
