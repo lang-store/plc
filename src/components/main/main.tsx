@@ -1,57 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
-import Selection from '../compare/selection';
-import DifficultyMatrix from '../compare/difficulty-matrix';
-import CompareRow from '../compare/compare-row';
-
-import { JsonStory } from '../../models/models';
-import Charts from '../compare/charts';
-
-import { TEST_LANGUAGES, ROWS } from '../../models/metadata';
 import CompareLanguages from '../compare/compare-languages';
+
+import { Frame, CompareFrame, InfoFrame } from '../../models/models';
+import { TEST_LANGUAGES } from '../../models/metadata';
+import Info from '../info';
 
 const styles = StyleSheet.create({
   main: {
   },
-  compare: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '30px',
-  },
-  vs: {
-    fontFamily: 'Impact',
-    padding: '10px',
-    fontSize: '50px',
-    color: 'rgb(66, 103, 178)',
-  },
-  label: {
-    padding: '10px',
-    margin: '10px',
-    fontSize: '30px',
-    color: 'rgb(66, 103, 178)',
-  },
-  container: {
-    textAlign: 'center',
-  },
-  charts: {
-    padding: '100px',
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });
 
+const renderFrames = (frame: Frame) => {
+  if (!frame) {
+    return;
+  }
+
+  if (frame instanceof CompareFrame) {
+    return <CompareLanguages languages={frame.languages} />;
+  }
+
+  if (frame instanceof InfoFrame) {
+    return <Info languages={frame.languages} />;
+  }
+};
+
 function Main() {
+  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES)]);
 
   return (
     <div className={css(styles.main)}>
       <Header logo={`Programming Languages Compare`} />
-      <CompareLanguages languages={TEST_LANGUAGES} />
+      {/* <CompareLanguages languages={TEST_LANGUAGES} /> */}
+      {
+        renderFrames(frames.slice(-1)[0])
+      }
     </div>
   );
 }
