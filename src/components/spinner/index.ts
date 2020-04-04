@@ -1,1 +1,1 @@
-export { default } from './selection';
+export { default } from './spinner';
