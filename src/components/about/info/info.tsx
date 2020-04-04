@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import Label from '../tools/label';
-import { JsonStory } from '../../models/models';
+import Label from '../../tools/label';
+import { JsonStory } from '../../../models/models';
 
 const styles = StyleSheet.create({
   info: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '30px',
   },
 });
 
@@ -17,7 +21,7 @@ function Info({ languages }: Props) {
 
   return (
     <div className={css(styles.info)}>
-      <Label text={`Информационный стенд ПРИЗМА`} />
+      <Label text={`Информационный стенд "ПРИЗМА"`} />
     </div>
   );
 }

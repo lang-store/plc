@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
@@ -6,10 +6,14 @@ import CompareLanguages from '../compare/compare-languages';
 
 import { Frame, CompareFrame, InfoFrame } from '../../models/models';
 import { TEST_LANGUAGES } from '../../models/metadata';
-import Info from '../info';
+import Info from '../about/info';
+import Back from '../tools/back';
 
 const styles = StyleSheet.create({
   main: {
+  },
+  body: {
+    overflow: 'auto',
   },
 });
 
@@ -28,15 +32,24 @@ const renderFrames = (frame: Frame) => {
 };
 
 function Main() {
-  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES)]);
+  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES), new CompareFrame(TEST_LANGUAGES)]);
+
+  const removeLastFrame = () => {
+    const newFrames = [...frames];
+    newFrames.pop();
+    setFrames(newFrames);
+  };
 
   return (
     <div className={css(styles.main)}>
       <Header logo={`Programming Languages Compare`} />
-      {/* <CompareLanguages languages={TEST_LANGUAGES} /> */}
-      {
-        renderFrames(frames.slice(-1)[0])
-      }
+      <Back onClick={removeLastFrame} />
+
+      <div className={css(styles.body)}>
+        {
+          renderFrames(frames.slice(-1)[0])
+        }
+      </div>
     </div>
   );
 }
