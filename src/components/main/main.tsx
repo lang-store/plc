@@ -43,7 +43,7 @@ function Main() {
 
   return (
     <div className={css(styles.main)}>
-      <Header logo={`Programming Languages Compare`} />
+      <Header onClick={() => setFrames([frames[0]])} logo={`Programming Languages Compare`} />
       {frames.length > MIN_FRAMES_LENGTH && <Back onClick={removeLastFrame} />}
 
       <div className={css(styles.body)}>

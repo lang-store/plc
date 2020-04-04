@@ -24,13 +24,14 @@ const LOGO = 'PLR';
 
 interface Props {
   logo: string;
+  onClick: () => void;
 }
 
-function Header({ logo }: Props) {
+function Header({ logo, onClick }: Props) {
 
   return (
     <div className={css(styles.container)}>
-      <div className={css(styles.logo)}>{logo}</div>
+      <div onClick={onClick} className={css(styles.logo)}>{logo}</div>
     </div>
   );
 }
