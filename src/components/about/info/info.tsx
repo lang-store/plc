@@ -5,6 +5,7 @@ import Label from '../../tools/label';
 import Text from '../../tools/text';
 import { JsonStory, Core } from '../../../models/models';
 import Button from '../../tools/button';
+import TopList from '../top-list';
 
 const styles = StyleSheet.create({
   info: {
@@ -33,6 +34,7 @@ function Info({ languages, core }: Props) {
       <Label text={`Programming Languages Compare System`} />
       <Text text={abstract} />
       <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
+      <TopList languages={languages} />
     </div>
   );
 }
