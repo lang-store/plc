@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 const { Chart } = require('react-google-charts');
 
-import Spinner from '../spinner';
-import { JsonStory } from '../../models/models';
+import Spinner from '../../tools/spinner';
+import { JsonStory } from '../../../models/models';
 
 
 const styles = StyleSheet.create({

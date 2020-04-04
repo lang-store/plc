@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
-import Selection from '../selection';
-import DifficultyMatrix from '../difficulty-matrix';
-import CompareRow from '../compare-row';
+import Selection from '../compare/selection';
+import DifficultyMatrix from '../compare/difficulty-matrix';
+import CompareRow from '../compare/compare-row';
 
 import { JsonStory } from '../../models/models';
-import Charts from '../charts';
+import Charts from '../compare/charts';
 
 import { TEST_LANGUAGES, ROWS } from '../../models/metadata';
 

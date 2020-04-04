@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { JsonStory } from '../../models/models';
+import { JsonStory } from '../../../models/models';
 
 
 const styles = StyleSheet.create({
