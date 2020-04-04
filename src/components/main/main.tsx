@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
   main: {
   },
   body: {
-    overflow: 'auto',
   },
 });
 
@@ -31,6 +30,8 @@ const renderFrames = (frame: Frame) => {
   }
 };
 
+const MIN_FRAMES_LENGTH = 1;
+
 function Main() {
   const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES), new CompareFrame(TEST_LANGUAGES)]);
 
@@ -43,7 +44,7 @@ function Main() {
   return (
     <div className={css(styles.main)}>
       <Header logo={`Programming Languages Compare`} />
-      <Back onClick={removeLastFrame} />
+      {frames.length > MIN_FRAMES_LENGTH && <Back onClick={removeLastFrame} />}
 
       <div className={css(styles.body)}>
         {
