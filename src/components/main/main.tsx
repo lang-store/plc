@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
   main: {
   },
   body: {
+    height: 'calc(100vh - 45px)',
+    overflow: 'auto',
   },
 });
 

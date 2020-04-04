@@ -3,6 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
   container: {
+    height: '43px',
     border: '1px solid rgb(41, 72, 125)',
     background: 'rgb(66, 103, 178)',
     display: 'flex',
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
   logo: {
     fontFamily: 'Impact',
     height: '24px',
-    margin: '4px',
+    margin: '10px',
     paddingLeft: '5vh',
     fontSize: 'larger',
     cursor: 'pointer',

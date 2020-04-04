@@ -4,11 +4,10 @@ const { Chart } = require('react-google-charts');
 
 import Spinner from '../../tools/spinner';
 import { JsonStory } from '../../../models/models';
-
+import { COLUMN_NAMES, ROWS } from '../../../models/metadata';
 
 const styles = StyleSheet.create({
   charts: {
-    padding: '100px',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -22,14 +21,6 @@ interface Props {
   languageA: JsonStory;
   languageB: JsonStory;
 }
-
-const ROWS = {
-  'core': 'Ядро (К)',
-  'expansion': 'Специальные функции (Р)',
-  'limit': 'Ограничения (В)',
-  'union': 'Общность, Практичность (U)',
-};
-const COLUMN_NAMES = ['Константы (V)', 'Вычисления (E)', 'Память (M)', 'Управление (C)', 'Структуры (S)'];
 
 function Charts({ languageA, languageB }: Props) {
 
