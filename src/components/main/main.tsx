@@ -5,9 +5,10 @@ import Header from '../header';
 import CompareLanguages from '../frames/compare-languages';
 import Info from '../frames/info';
 
-import { Frame, CompareFrame, InfoFrame, Core } from '../../models/models';
+import { Frame, CompareFrame, InfoFrame, Core, InitMarkupFrame } from '../../models/models';
 import { TEST_LANGUAGES } from '../../models/metadata';
 import Back from '../tools/back';
+import Markup from '../frames/init-markup';
 
 const styles = StyleSheet.create({
   main: {
@@ -22,8 +23,13 @@ const MIN_FRAMES_LENGTH = 1;
 
 function Main() {
   const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES)]);
+  const addFrame = (frame: Frame) => setFrames([...frames, frame]);
+
   const core: Core = useMemo(() => {
-    return { showCompareLanguagesFrame: () => setFrames([...frames, new CompareFrame(TEST_LANGUAGES)]) };
+    return {
+      showCompareLanguagesFrame: () => addFrame(new CompareFrame(TEST_LANGUAGES)),
+      showInitMarkupFrame: () => addFrame(new InitMarkupFrame())
+    };
   }, []);
 
   const removeLastFrame = () => {
@@ -43,6 +49,10 @@ function Main() {
 
     if (frame instanceof InfoFrame) {
       return <Info core={core} languages={frame.languages} />;
+    }
+
+    if (frame instanceof InitMarkupFrame) {
+      return <Markup core={core} />;
     }
   };
 

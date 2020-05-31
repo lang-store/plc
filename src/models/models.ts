@@ -14,6 +14,7 @@ export interface JsonStory {
 
 export interface Core {
     showCompareLanguagesFrame: () => void;
+    showInitMarkupFrame: () => void;
 }
 
 export class Frame {

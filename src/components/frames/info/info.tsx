@@ -41,7 +41,7 @@ function Info({ languages, core }: Props) {
       <Label text={`Programming Language Markup System`} />
       <Text text={abstract} />
       <div className={css(styles.compare)}>
-        <Button onClick={core.showCompareLanguagesFrame} name={`Добавить разметку`} />
+        <Button onClick={core.showInitMarkupFrame} name={`Добавить разметку`} />
         <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
       </div>
       <Table title={'Размеченные языки'} items={['Lisp', 'Java']} onClick={() => { }} />
