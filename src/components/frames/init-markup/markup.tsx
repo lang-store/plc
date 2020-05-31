@@ -8,13 +8,13 @@ import Cancel from '../../tools/cancel';
 import Concept from '../../init/concept';
 import List from '../../tools/list';
 import Button from '../../tools/button';
+import Add from '../../tools/add';
 
 const styles = StyleSheet.create({
   compare: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: '30px',
+    padding: '10px 10px 10px 30px',
   },
   info: {
     display: 'flex',
@@ -70,6 +70,12 @@ function Markup({ core }: Props) {
         </table>
 
         {/* <Concept onOk={() => { }} onCancel={() => { }} /> */}
+
+        <div className={css(styles.compare)}>
+          <Add onClick={() => { }} />
+          <span className={css(styles.name)}>Добавить понятие</span>
+        </div>
+
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
           rows={[
