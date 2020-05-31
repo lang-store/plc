@@ -62,12 +62,14 @@ interface Props {
 
 function Markup({ core }: Props) {
   const [showInitConcept, setShowConcept] = useState(false);
-  const [concepts, setConcepts] = useState<Concept[]>([{
-    name: 'type sym = (a, b, . . . )',
-    category: 'Вычисления (E)',
-    method: 'Значения (V)',
-    examples: [],
-  }]);
+  const [concepts, setConcepts] = useState<Concept[]>([
+    {
+      name: 'type sym = (a, b, . . . )',
+      category: 'Вычисления (E)',
+      method: 'Значения (V)',
+      examples: [],
+    },
+  ]);
 
   return (
     <div className={css(styles.info)}>
