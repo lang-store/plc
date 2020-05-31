@@ -58,6 +58,7 @@ module.exports = (env, argv) => {
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
+        favicon: './assets/icon1.png',
         template: './public/index.html'
       }),
       new ConcatPlugin({
