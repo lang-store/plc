@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: '30px',
   },
+  title: {
+    padding: '10px',
+    fontSize: '30px',
+    color: 'rgb(66, 103, 178)',
+  },
 });
 
 interface Props {
@@ -28,7 +33,9 @@ function Markup({ core }: Props) {
 
   return (
     <div className={css(styles.info)}>
-      <Card />
+      <Card>
+        <span className={css(styles.title)}>Разметка</span>
+      </Card>
     </div>
   );
 }

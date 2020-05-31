@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 const MIN_FRAMES_LENGTH = 1;
 
 function Main() {
-  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES)]);
+  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES), new InitMarkupFrame()]);
   const addFrame = (frame: Frame) => setFrames([...frames, frame]);
 
   const core: Core = useMemo(() => {
