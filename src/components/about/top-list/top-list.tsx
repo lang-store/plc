@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import Label from '../../tools/label';
-import Text from '../../tools/text';
 import { JsonStory, Core } from '../../../models/models';
-import Button from '../../tools/button';
 import { COLUMN_NAMES } from '../../../models/metadata';
 
 const styles = StyleSheet.create({
@@ -76,7 +73,6 @@ function TopList({ languages }: Props) {
       </div>
 
       <div className={css(styles.container)}>
-
         {
           languages
             .map(lang =>

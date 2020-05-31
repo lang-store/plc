@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Label from '../../tools/label';
 import Text from '../../tools/text';
 import { JsonStory, Core } from '../../../models/models';
+import Table from '../../tools/table';
 import Button from '../../tools/button';
 import TopList from '../top-list';
 
@@ -33,8 +34,8 @@ function Info({ languages, core }: Props) {
     <div className={css(styles.info)}>
       <Label text={`Programming Languages Compare System`} />
       <Text text={abstract} />
+      <Table items={['LOL', 'KEK']} onClick={() => { }} />
       <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
-      <TopList languages={languages} />
     </div>
   );
 }
