@@ -41,9 +41,10 @@ function Info({ languages, core }: Props) {
       <Label text={`Programming Languages Compare System`} />
       <Text text={abstract} />
       <div className={css(styles.compare)}>
-        <Table title={'Размеченные языки'} items={['LOL', 'KEK']} onClick={() => { }} />
+        <Button onClick={core.showCompareLanguagesFrame} name={`Добавить разметку`} />
         <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
       </div>
+      <Table title={'Размеченные языки'} items={['Lisp', 'Java']} onClick={() => { }} />
     </div>
   );
 }
