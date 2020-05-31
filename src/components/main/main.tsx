@@ -25,7 +25,7 @@ function Main() {
   const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES), new InitMarkupFrame()]);
   const addFrame = (frame: Frame) => setFrames([...frames, frame]);
 
-  
+
   const removeLastFrame = () => {
     const newFrames = [...frames];
     newFrames.pop();
@@ -55,7 +55,7 @@ function Main() {
     }
 
     if (frame instanceof InitMarkupFrame) {
-      return <Markup core={core} />;
+      return <Markup onSave={() => { }} core={core} />;
     }
   };
 
