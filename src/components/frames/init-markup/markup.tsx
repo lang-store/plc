@@ -5,6 +5,9 @@ import { Core } from '../../../models/models';
 import Card from '../../tools/card';
 import Ok from '../../tools/ok';
 import Cancel from '../../tools/cancel';
+import Concept from '../../init/concept';
+import List from '../../tools/list';
+import Button from '../../tools/button';
 
 const styles = StyleSheet.create({
   compare: {
@@ -25,8 +28,6 @@ const styles = StyleSheet.create({
     fontSize: '30px',
     color: 'rgb(66, 103, 178)',
   },
-  th: {
-  },
   name: {
     textAlign: 'left',
     padding: '4px',
@@ -36,9 +37,7 @@ const styles = StyleSheet.create({
   table: {
     margin: '0 auto',
     width: '90%',
-    padding: '15px',
-    borderRadius: '5px',
-    boxShadow: '0.2em 0em 15px rgba(122,122,122,0.7)',
+    padding: '15px 15px 20px 15px',
   },
   input: {
     textAlign: 'center',
@@ -54,21 +53,6 @@ interface Props {
   core: Core;
 }
 
-const CATEGORYS_OF_SEMANTIC_SYSTEMS = [
-  'Вычисления (E)',
-  'Укрупнения (M)',
-  'Правильность (C)',
-  'Контекст (S)',
-];
-
-const METHODS_OF_IMPLEMENTATION_SUPPORT = [
-  'Значения (V)',
-  'Выражения (E)',
-  'Память (M)',
-  'Контроль (C)',
-  'Структуры (S)',
-];
-
 function Markup({ core }: Props) {
 
   return (
@@ -78,42 +62,49 @@ function Markup({ core }: Props) {
 
         <table className={css(styles.table)}>
           <tr>
-            <th className={css(styles.name, styles.th)}>Понятие</th>
-            <th className={css(styles.th)}>
+            <th className={css(styles.name)}>Язык программирования</th>
+            <th>
               <input className={css(styles.input)} />
-            </th>
-          </tr>
-          <tr>
-            <th className={css(styles.name, styles.th)}>Категория семантических систем</th>
-            <th className={css(styles.th)}>
-              <select className={css(styles.input)} >
-                {
-                  CATEGORYS_OF_SEMANTIC_SYSTEMS.map(ctg => <option value={ctg}>{ctg}</option>)
-                }
-              </select>
-            </th>
-          </tr>
-          <tr>
-            <th className={css(styles.name, styles.th)}>Метод реализационной поддержки</th>
-            <th className={css(styles.th)}>
-              <select className={css(styles.input)} >
-                {
-                  METHODS_OF_IMPLEMENTATION_SUPPORT.map(mthd => <option value={mthd}>{mthd}</option>)
-                }
-              </select>
-            </th>
-          </tr>
-
-          <tr>
-            <th className={css(styles.th)}>
-              <Ok onClick={() => { }} />
-            </th>
-            <th className={css(styles.th)}>
-              <Cancel onClick={() => { }} />
             </th>
           </tr>
         </table>
 
+        {/* <Concept onOk={() => { }} onCancel={() => { }} /> */}
+        <List
+          columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
+          rows={[
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
+          ]}
+          onClick={() => { }}
+        />
       </Card>
     </div>
   );

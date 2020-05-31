@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Label from '../../tools/label';
 import Text from '../../tools/text';
 import { JsonStory, Core } from '../../../models/models';
-import Table from '../../tools/table';
+import List from '../../tools/list';
 import Button from '../../tools/button';
 import TopList from '../../about/top-list';
 
@@ -44,7 +44,7 @@ function Info({ languages, core }: Props) {
         <Button onClick={core.showInitMarkupFrame} name={`Добавить разметку`} />
         <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
       </div>
-      <Table title={'Размеченные языки'} items={['Lisp', 'Java']} onClick={() => { }} />
+      {/* <List title={'Размеченные языки'} items={['Lisp', 'Java']} onClick={() => { }} /> */}
     </div>
   );
 }
