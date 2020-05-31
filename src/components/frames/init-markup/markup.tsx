@@ -5,7 +5,7 @@ import { Core, Concept } from '../../../models/models';
 import Card from '../../tools/card';
 import Ok from '../../tools/ok';
 import Cancel from '../../tools/cancel';
-import ConceptBuilder from '../../init/concept';
+import ConceptBuilder from '../../init/concept-builder';
 import List from '../../tools/list';
 import Button from '../../tools/button';
 import Add from '../../tools/add';
