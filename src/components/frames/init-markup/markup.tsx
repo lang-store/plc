@@ -23,11 +23,45 @@ const styles = StyleSheet.create({
     fontSize: '30px',
     color: 'rgb(66, 103, 178)',
   },
+  th: {
+  },
+  name: {
+    textAlign: 'left',
+    padding: '4px',
+    fontSize: '16px',
+    color: 'rgb(66, 103, 178)',
+  },
+  table: {
+    padding: '15px',
+  },
+  input: {
+    textAlign: 'center',
+    width: '250px',
+    minHeight: '30px',
+    padding: '0',
+    borderRadius: '5px',
+    border: '1px solid rgb(66, 103, 178)'
+  }
 });
 
 interface Props {
   core: Core;
 }
+
+const CATEGORYS_OF_SEMANTIC_SYSTEMS = [
+  'Вычисления (E)',
+  'Укрупнения (M)',
+  'Правильность (C)',
+  'Контекст (S)',
+];
+
+const METHODS_OF_IMPLEMENTATION_SUPPORT = [
+  'Значения (V)',
+  'Выражения (E)',
+  'Память (M)',
+  'Контроль (C)',
+  'Структуры (S)',
+];
 
 function Markup({ core }: Props) {
 
@@ -35,6 +69,36 @@ function Markup({ core }: Props) {
     <div className={css(styles.info)}>
       <Card>
         <span className={css(styles.title)}>Разметка</span>
+
+        <table className={css(styles.table)}>
+          <tr>
+            <th className={css(styles.name, styles.th)}>Понятие</th>
+            <th className={css(styles.th)}>
+              <input className={css(styles.input)} />
+            </th>
+          </tr>
+          <tr>
+            <th className={css(styles.name, styles.th)}>Категория семантических систем</th>
+            <th className={css(styles.th)}>
+              <select className={css(styles.input)} >
+                {
+                  CATEGORYS_OF_SEMANTIC_SYSTEMS.map(ctg => <option value={ctg}>{ctg}</option>)
+                }
+              </select>
+            </th>
+          </tr>
+          <tr>
+            <th className={css(styles.name, styles.th)}>Метод реализационной поддержки</th>
+            <th className={css(styles.th)}>
+              <select className={css(styles.input)} >
+                {
+                  METHODS_OF_IMPLEMENTATION_SUPPORT.map(mthd => <option value={mthd}>{mthd}</option>)
+                }
+              </select>
+            </th>
+          </tr>
+        </table>
+
       </Card>
     </div>
   );

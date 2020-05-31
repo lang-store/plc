@@ -5,9 +5,11 @@ const styles = StyleSheet.create({
   container: {
     textAlign: 'center',
     width: '700px',
-    height: '600px',
+    minHeight: '600px',
     borderRadius: '5px',
     boxShadow: '0.2em 0em 15px rgba(122,122,122,0.7)',
+    display: 'flex',
+    flexFlow: 'column',
   },
 });
 
