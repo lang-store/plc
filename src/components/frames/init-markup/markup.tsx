@@ -3,6 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 import { Core } from '../../../models/models';
 import Card from '../../tools/card';
+import Ok from '../../tools/ok';
 
 const styles = StyleSheet.create({
   compare: {
@@ -32,7 +33,10 @@ const styles = StyleSheet.create({
     color: 'rgb(66, 103, 178)',
   },
   table: {
+    margin: '0 auto',
+    width: '90%',
     padding: '15px',
+    boxShadow: '0.2em 0em 15px rgba(122,122,122,0.7)',
   },
   input: {
     textAlign: 'center',
@@ -95,6 +99,12 @@ function Markup({ core }: Props) {
                   METHODS_OF_IMPLEMENTATION_SUPPORT.map(mthd => <option value={mthd}>{mthd}</option>)
                 }
               </select>
+            </th>
+          </tr>
+
+          <tr>
+            <th className={css(styles.th)}><Ok onClick={() => {}}/></th>
+            <th className={css(styles.th)}>
             </th>
           </tr>
         </table>
