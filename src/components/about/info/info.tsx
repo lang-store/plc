@@ -9,6 +9,12 @@ import Button from '../../tools/button';
 import TopList from '../top-list';
 
 const styles = StyleSheet.create({
+  compare: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '30px',
+  },
   info: {
     display: 'flex',
     flexDirection: 'column',
@@ -34,8 +40,10 @@ function Info({ languages, core }: Props) {
     <div className={css(styles.info)}>
       <Label text={`Programming Languages Compare System`} />
       <Text text={abstract} />
-      <Table items={['LOL', 'KEK']} onClick={() => { }} />
-      <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
+      <div className={css(styles.compare)}>
+        <Table title={'Размеченные языки'} items={['LOL', 'KEK']} onClick={() => { }} />
+        <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
+      </div>
     </div>
   );
 }
