@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import Ok from '../../tools/ok';
 import Cancel from '../../tools/cancel';
+import { Concept } from '../../../models/models';
 
 const styles = StyleSheet.create({
   th: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  onOk: () => void;
+  onOk: (concept: Concept) => void;
   onCancel: () => void;
 }
 
@@ -50,43 +51,52 @@ const METHODS_OF_IMPLEMENTATION_SUPPORT = [
   'Структуры (S)',
 ];
 
-const Concept = ({ onOk, onCancel }: Props) =>
-  <table className={css(styles.table)}>
-    <tr>
-      <th className={css(styles.name, styles.th)}>Понятие</th>
-      <th className={css(styles.th)}>
-        <input className={css(styles.input)} />
-      </th>
-    </tr>
-    <tr>
-      <th className={css(styles.name, styles.th)}>Категория семантических систем</th>
-      <th className={css(styles.th)}>
-        <select className={css(styles.input)}>
-          {
-            CATEGORYS_OF_SEMANTIC_SYSTEMS.map(ctg => <option value={ctg}>{ctg}</option>)
-          }
-        </select>
-      </th>
-    </tr>
-    <tr>
-      <th className={css(styles.name, styles.th)}>Метод реализационной поддержки</th>
-      <th className={css(styles.th)}>
-        <select className={css(styles.input)}>
-          {
-            METHODS_OF_IMPLEMENTATION_SUPPORT.map(mthd => <option value={mthd}>{mthd}</option>)
-          }
-        </select>
-      </th>
-    </tr>
+const ConceptBuilder = ({ onOk, onCancel }: Props) => {
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState(CATEGORYS_OF_SEMANTIC_SYSTEMS[0]);
+  const [method, setMethod] = useState(METHODS_OF_IMPLEMENTATION_SUPPORT[0]);
 
-    <tr>
-      <th className={css(styles.th)}>
-        <Ok onClick={onOk} />
-      </th>
-      <th className={css(styles.th)}>
-        <Cancel onClick={onCancel} />
-      </th>
-    </tr>
-  </table>;
+  return (
+    <table className={css(styles.table)}>
+      <tbody>
+        <tr>
+          <th className={css(styles.name, styles.th)}>Понятие</th>
+          <th className={css(styles.th)}>
+            <input className={css(styles.input)} onChange={(e) => setName(e.target.value)} />
+          </th>
+        </tr>
+        <tr>
+          <th className={css(styles.name, styles.th)}>Категория семантических систем</th>
+          <th className={css(styles.th)}>
+            <select className={css(styles.input)} onChange={(c) => setCategory(c.target.value)}>
+              {
+                CATEGORYS_OF_SEMANTIC_SYSTEMS.map(ctg => <option value={ctg}>{ctg}</option>)
+              }
+            </select>
+          </th>
+        </tr>
+        <tr>
+          <th className={css(styles.name, styles.th)}>Метод реализационной поддержки</th>
+          <th className={css(styles.th)}>
+            <select className={css(styles.input)} onChange={(c) => setMethod(c.target.value)}>
+              {
+                METHODS_OF_IMPLEMENTATION_SUPPORT.map(mthd => <option value={mthd}>{mthd}</option>)
+              }
+            </select>
+          </th>
+        </tr>
 
-export default Concept;
+        <tr>
+          <th className={css(styles.th)}>
+            <Ok onClick={() => onOk({ name, category, method, examples: [] })} />
+          </th>
+          <th className={css(styles.th)}>
+            <Cancel onClick={onCancel} />
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+export default ConceptBuilder;

@@ -25,18 +25,21 @@ function Main() {
   const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES), new InitMarkupFrame()]);
   const addFrame = (frame: Frame) => setFrames([...frames, frame]);
 
-  const core: Core = useMemo(() => {
-    return {
-      showCompareLanguagesFrame: () => addFrame(new CompareFrame(TEST_LANGUAGES)),
-      showInitMarkupFrame: () => addFrame(new InitMarkupFrame())
-    };
-  }, []);
-
+  
   const removeLastFrame = () => {
     const newFrames = [...frames];
     newFrames.pop();
     setFrames(newFrames);
   };
+
+  const core: Core = useMemo(() => {
+    return {
+      showCompareLanguagesFrame: () => addFrame(new CompareFrame(TEST_LANGUAGES)),
+      showInitMarkupFrame: () => addFrame(new InitMarkupFrame()),
+      removeLastFrame,
+    };
+  }, []);
+
 
   const renderFrames = (frame: Frame) => {
     if (!frame) {

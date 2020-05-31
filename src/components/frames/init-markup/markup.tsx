@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { Core } from '../../../models/models';
+import { Core, Concept } from '../../../models/models';
 import Card from '../../tools/card';
 import Ok from '../../tools/ok';
 import Cancel from '../../tools/cancel';
-import Concept from '../../init/concept';
+import ConceptBuilder from '../../init/concept';
 import List from '../../tools/list';
 import Button from '../../tools/button';
 import Add from '../../tools/add';
@@ -46,14 +46,28 @@ const styles = StyleSheet.create({
     padding: '0',
     borderRadius: '5px',
     border: '1px solid rgb(66, 103, 178)'
+  },
+  concept: {
+    padding: '30px',
+  },
+  action: {
+    justifyContent: 'center',
   }
 });
 
 interface Props {
   core: Core;
+  onSave: () => void;
 }
 
 function Markup({ core }: Props) {
+  const [showInitConcept, setShowConcept] = useState(false);
+  const [concepts, setConcepts] = useState<Concept[]>([{
+    name: 'type sym = (a, b, . . . )',
+    category: 'Вычисления (E)',
+    method: 'Значения (V)',
+    examples: [],
+  }]);
 
   return (
     <div className={css(styles.info)}>
@@ -69,49 +83,35 @@ function Markup({ core }: Props) {
           </tr>
         </table>
 
-        {/* <Concept onOk={() => { }} onCancel={() => { }} /> */}
+        {
+          showInitConcept &&
+          <div className={css(styles.concept)}>
+            <ConceptBuilder onOk={(concept) => { setConcepts([...concepts, concept]); setShowConcept(false); }} onCancel={() => setShowConcept(false)} />
+          </div>
+        }
 
-        <div className={css(styles.compare)}>
-          <Add onClick={() => { }} />
-          <span className={css(styles.name)}>Добавить понятие</span>
-        </div>
+        {
+          !showInitConcept &&
+          <div className={css(styles.compare)}>
+            <Add onClick={() => setShowConcept(true)} />
+            <span className={css(styles.name)}>Добавить понятие</span>
+          </div>
+        }
 
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
-          rows={[
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-            ['type sym = (a, b, . . . )', 'Вычисления (E)', 'Значения (V)', '***'],
-          ]}
+          rows={
+            concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
+          }
           onClick={() => { }}
         />
+
+        <div className={css(styles.compare, styles.action)}>
+          <Button name={'Сохранить'} onClick={() => { }} />
+          <Button name={'Отмена'} onClick={() => core.removeLastFrame()} />
+        </div>
       </Card>
+
     </div>
   );
 }
