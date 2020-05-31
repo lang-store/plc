@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   main: {
   },
   body: {
-    height: 'calc(100vh - 45px)',
+    height: 'calc(100vh - 60px)',
     overflow: 'auto',
   },
 });
@@ -50,7 +50,7 @@ function Main() {
 
   return (
     <div className={css(styles.main)}>
-      <Header onClick={() => setFrames([frames[0]])} logo={`Programming Languages Compare`} />
+      <Header onClick={() => setFrames([frames[0]])} logo={`Programming Language Markup`} />
       {frames.length > MIN_FRAMES_LENGTH && <Back onClick={removeLastFrame} />}
 
       <div className={css(styles.body)}>

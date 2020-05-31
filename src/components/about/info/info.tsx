@@ -29,7 +29,7 @@ interface Props {
   core: Core;
 }
 
-const abstract = `Programming Languages Compare System (PLCS) является частью
+const abstract = `Programming Language Markup (PLM) является частью
 информационного стенда "ПРИЗМА" (программирование измерений) и предназначен для представления
 экспертных оценок возможностей языков программирования (ЯП). В данной системе сконцетрированы представления
 наиболее важных по мнению авторов языков программирования.`;
@@ -38,7 +38,7 @@ function Info({ languages, core }: Props) {
 
   return (
     <div className={css(styles.info)}>
-      <Label text={`Programming Languages Compare System`} />
+      <Label text={`Programming Language Markup System`} />
       <Text text={abstract} />
       <div className={css(styles.compare)}>
         <Button onClick={core.showCompareLanguagesFrame} name={`Добавить разметку`} />
