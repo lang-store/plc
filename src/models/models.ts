@@ -19,6 +19,8 @@ export interface Core {
 export class Frame {
 }
 
+export class InitMarkupFrame extends Frame { }
+
 export class InfoFrame extends Frame {
     constructor(public languages: JsonStory[]) {
         super();

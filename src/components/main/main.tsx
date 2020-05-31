@@ -2,11 +2,11 @@ import React, { useState, useMemo } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
-import CompareLanguages from '../compare/compare-languages';
+import CompareLanguages from '../frames/compare-languages';
+import Info from '../frames/info';
 
 import { Frame, CompareFrame, InfoFrame, Core } from '../../models/models';
 import { TEST_LANGUAGES } from '../../models/metadata';
-import Info from '../about/info';
 import Back from '../tools/back';
 
 const styles = StyleSheet.create({
@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
     overflow: 'auto',
   },
 });
-
-
 
 const MIN_FRAMES_LENGTH = 1;
 

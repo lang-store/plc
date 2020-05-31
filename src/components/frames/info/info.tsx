@@ -6,7 +6,7 @@ import Text from '../../tools/text';
 import { JsonStory, Core } from '../../../models/models';
 import Table from '../../tools/table';
 import Button from '../../tools/button';
-import TopList from '../top-list';
+import TopList from '../../about/top-list';
 
 const styles = StyleSheet.create({
   compare: {
