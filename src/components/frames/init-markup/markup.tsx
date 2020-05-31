@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import { Core } from '../../../models/models';
 import Card from '../../tools/card';
 import Ok from '../../tools/ok';
+import Cancel from '../../tools/cancel';
 
 const styles = StyleSheet.create({
   compare: {
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
     margin: '0 auto',
     width: '90%',
     padding: '15px',
+    borderRadius: '5px',
     boxShadow: '0.2em 0em 15px rgba(122,122,122,0.7)',
   },
   input: {
@@ -103,8 +105,11 @@ function Markup({ core }: Props) {
           </tr>
 
           <tr>
-            <th className={css(styles.th)}><Ok onClick={() => {}}/></th>
             <th className={css(styles.th)}>
+              <Ok onClick={() => { }} />
+            </th>
+            <th className={css(styles.th)}>
+              <Cancel onClick={() => { }} />
             </th>
           </tr>
         </table>
