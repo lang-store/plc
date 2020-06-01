@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite';
 import { Language } from '../../../models/models';
 import Matrix from '../../tools/matrix';
 import { LanguageStrategy } from '../../../logic/language';
+import { MarkupMeta } from '../../../logic/language/meta';
 
 const styles = StyleSheet.create({
   compare: {
@@ -63,25 +64,27 @@ interface Props {
 }
 
 function Markup({ frame, onSave }: Props) {
+  const { language } = frame;
   const { frameLord } = frame.dragonet;
+  const markupMeta = new MarkupMeta();
 
   return (
     <div className={css(styles.info)}>
       <Card>
-        <span className={css(styles.title)}>Разметка {frame.name}</span>
+        <span className={css(styles.title)}>Разметка {language.name}</span>
 
         <table className={css(styles.table)}>
           <tbody>
             <tr>
               <th className={css(styles.name)}>Язык программирования</th>
               <th>
-                <input defaultValue={frame.name} className={css(styles.input)} onChange={(e) => frame.saveName(e.target.value)} />
+                <input defaultValue={language.name} className={css(styles.input)} onChange={(e) => frame.saveName(e.target.value)} />
               </th>
             </tr>
           </tbody>
         </table>
 
-        <Matrix languageStrategy={new LanguageStrategy({ name: frame.name, concepts: frame.concepts })} />
+        <Matrix language={frame.language} />
 
         {
           frame.showInitConcept &&
@@ -101,13 +104,18 @@ function Markup({ frame, onSave }: Props) {
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
           rows={
-            frame.concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length.toString()])
+            language.concepts.map(concept => [
+              concept.name,
+              markupMeta.getCategoryNameByCode(concept.category),
+              markupMeta.getMethodNameByCode(concept.method),
+              concept.examples.length.toString()
+            ])
           }
-          onClick={(row) => frameLord.openConceptFrame(frame.concepts.find(concept => concept.name === row[0]))}
+          onClick={(row) => frameLord.openConceptFrame(language.concepts.find(concept => concept.name === row[0]))}
         />
 
         <div className={css(styles.compare, styles.action)}>
-          <Button name={'Сохранить'} onClick={() => onSave({ name: frame.name, concepts: frame.concepts })} />
+          <Button name={'Сохранить'} onClick={() => onSave({ name: language.name, concepts: language.concepts })} />
           <Button name={'Отмена'} onClick={() => frameLord.removeLastFrame()} />
         </div>
       </Card>

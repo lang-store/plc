@@ -1,28 +1,31 @@
-import { Frame, Concept } from '../../models/models';
+import { Frame, Concept, Language } from '../../models/models';
 import { observable, action } from 'mobx';
+import { LanguageStrategy } from '../language';
 
 export class InitMarkupFrame extends Frame {
-    @observable name: string = '';
-    @observable concepts: Concept[] = [
-        {
-            name: 'type sym = (a, b, . . . )',
-            category: 'E',
-            method: 'V',
-            examples: [{
-                example: 'a+b',
-                notes: 'Это так работает'
-            }],
-        }
-    ];
+    @observable language: Language = {
+        name: '',
+        concepts: [
+            {
+                name: 'type sym = (a, b, . . . )',
+                category: 'E',
+                method: 'V',
+                examples: [{
+                    example: 'a+b',
+                    notes: 'Это так работает'
+                }],
+            }
+        ]
+    };
 
     @observable showInitConcept = false;
 
-    @action.bound saveName = (name: string) => this.name = name;
+    @action.bound saveName = (name: string) => this.language.name = name;
 
     @action.bound openConceptConstructor = () => this.showInitConcept = true;
 
     @action.bound doneConcept(concept: Concept) {
-        this.concepts.push(concept);
+        this.language.concepts.push(concept);
         this.showInitConcept = false;
     }
 

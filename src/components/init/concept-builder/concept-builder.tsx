@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Ok from '../../tools/ok';
 import Cancel from '../../tools/cancel';
 import { Concept } from '../../../models/models';
+import { MarkupMeta } from '../../../logic/language/meta';
 
 const styles = StyleSheet.create({
   th: {
@@ -36,25 +37,12 @@ interface Props {
   onCancel: () => void;
 }
 
-const CATEGORYS_OF_SEMANTIC_SYSTEMS = [
-  'Вычисления (E)',
-  'Укрупнения (M)',
-  'Правильность (C)',
-  'Контекст (S)',
-];
-
-const METHODS_OF_IMPLEMENTATION_SUPPORT = [
-  'Значения (V)',
-  'Выражения (E)',
-  'Память (M)',
-  'Контроль (C)',
-  'Структуры (S)',
-];
-
 const ConceptBuilder = ({ onOk, onCancel }: Props) => {
+  const markupMeta = new MarkupMeta();
+
   const [name, setName] = useState('');
-  const [category, setCategory] = useState(CATEGORYS_OF_SEMANTIC_SYSTEMS[0]);
-  const [method, setMethod] = useState(METHODS_OF_IMPLEMENTATION_SUPPORT[0]);
+  const [category, setCategory] = useState(markupMeta.categorys[0].code);
+  const [method, setMethod] = useState(markupMeta.methods[0].code);
 
   return (
     <table className={css(styles.table)}>
@@ -70,7 +58,7 @@ const ConceptBuilder = ({ onOk, onCancel }: Props) => {
           <th className={css(styles.th)}>
             <select className={css(styles.input)} onChange={(c) => setCategory(c.target.value)}>
               {
-                CATEGORYS_OF_SEMANTIC_SYSTEMS.map(ctg => <option value={ctg}>{ctg}</option>)
+                markupMeta.categorys.map(ctg => <option value={ctg.code}>{markupMeta.getCategoryNameByCode(ctg.code)}</option>)
               }
             </select>
           </th>
@@ -80,7 +68,7 @@ const ConceptBuilder = ({ onOk, onCancel }: Props) => {
           <th className={css(styles.th)}>
             <select className={css(styles.input)} onChange={(c) => setMethod(c.target.value)}>
               {
-                METHODS_OF_IMPLEMENTATION_SUPPORT.map(mthd => <option value={mthd}>{mthd}</option>)
+                markupMeta.methods.map(mthd => <option value={mthd.code}>{markupMeta.getMethodNameByCode(mthd.code)}</option>)
               }
             </select>
           </th>
@@ -88,7 +76,7 @@ const ConceptBuilder = ({ onOk, onCancel }: Props) => {
 
         <tr>
           <th className={css(styles.th)}>
-            <Ok onClick={() => onOk({ name, category, method, examples: [] })} />
+            <Ok onClick={() => onOk({ name, category: category, method: method, examples: [] })} />
           </th>
           <th className={css(styles.th)}>
             <Cancel onClick={onCancel} />

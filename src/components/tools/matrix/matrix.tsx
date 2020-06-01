@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { LanguageStrategy } from '../../../logic/language';
 import { observer } from 'mobx-react-lite';
-import { CATEGORYS_OF_SEMANTIC_SYSTEMS, METHODS_OF_IMPLEMENTATION_SUPPORT } from '../../../models/metadata';
+import { MarkupMeta } from '../../../logic/language/meta';
+import { Language } from '../../../models/models';
 
 
 const styles = StyleSheet.create({
@@ -54,35 +55,40 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  languageStrategy: LanguageStrategy;
+  language: Language;
 }
 
-function Matrix({ languageStrategy }: Props) {
+function Matrix({ language }: Props) {
+  const markupMeta = new MarkupMeta();
+
+  const getConceptsByCode = (category: string, method: string) => {
+    return language.concepts.filter(concept => concept.category === category && concept.method === method);
+  };
 
   return (
     <div className={css(styles.main)}>
       <div className={css(styles.container)}>
 
-        <span className={css(styles.title)}>{languageStrategy.language.name}</span>
+        <span className={css(styles.title)}>{language.name}</span>
         <div className={css(styles.tbl)}>
 
           <div className={css(styles.row, styles.titleRow)}>
             {
-              [undefined, ...METHODS_OF_IMPLEMENTATION_SUPPORT].map(column => <div className={css(styles.cell)}>{column && `${column.name} (${column.code})`}</div>)
+              [undefined, ...markupMeta.methods].map((column, index) =>
+                <div key={index} className={css(styles.cell)}>{column && markupMeta.getMethodNameByCode(column.code)}</div>
+              )
             }
           </div>
 
           {
-            CATEGORYS_OF_SEMANTIC_SYSTEMS.map(
-              category =>
-                <div className={css(styles.row)}>
-                  <div className={css(styles.cell, styles.titleRow)}>{`${category.name} (${category.code})`}</div>
+            markupMeta.categorys.map(
+              (category, index) =>
+                <div key={`${category.code}-${index}`} className={css(styles.row)}>
+                  <div className={css(styles.cell, styles.titleRow)}>{markupMeta.getCategoryNameByCode(category.code)}</div>
                   {
-                    METHODS_OF_IMPLEMENTATION_SUPPORT.map(method =>
-                      <div
-                        className={css(styles.cell)}
-                      >
-                        {languageStrategy.getConceptsByCode(category.code, method.code).length}
+                    markupMeta.methods.map(method =>
+                      <div key={`${method.code}-${index}`} className={css(styles.cell)} >
+                        {getConceptsByCode(category.code, method.code).length}
                       </div>
                     )
                   }
