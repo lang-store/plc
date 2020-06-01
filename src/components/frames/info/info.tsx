@@ -38,6 +38,8 @@ const abstract = `Programming Language Markup (PLM) является часть�
 
 function Info({ languages, frame }: Props) {
   const { dragonet } = frame;
+  const { frameLord } = dragonet;
+
   const markupMeta = new MarkupMeta();
 
   return (
@@ -46,8 +48,8 @@ function Info({ languages, frame }: Props) {
       <Text text={abstract} />
 
       <div className={css(styles.compare)}>
-        <Button onClick={dragonet.frameLord.openMarkupFrame} name={`Добавить разметку`} />
-        <Button onClick={dragonet.frameLord.openCompareFrame} name={`Сравнить языки программирования`} />
+        <Button onClick={() => frameLord.openMarkupFrame()} name={`Добавить разметку`} />
+        <Button onClick={() => frameLord.openCompareFrame()} name={`Сравнить языки программирования`} />
       </div>
 
       <List
@@ -60,7 +62,12 @@ function Info({ languages, frame }: Props) {
             language.concepts.length.toString()
           ])
         }
-        onClick={() => { }}
+        onClick={(row) => {
+          const lang = dragonet.languages.find(language => language.name === row[0]);
+          if (lang) {
+            frameLord.openMarkupFrame(lang);
+          }
+        }}
       />
     </div>
   );

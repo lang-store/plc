@@ -1,5 +1,5 @@
 import { observable, action, computed, } from 'mobx';
-import { Frame, Concept, } from '../models/models';
+import { Frame, Concept, Language, } from '../models/models';
 import { TEST_LANGUAGES } from '../models/metadata';
 import { Dragonet } from './dragonet';
 import { InfoFrame, CompareFrame, InitMarkupFrame, ConceptFrame } from './frames';
@@ -19,7 +19,7 @@ export class FrameLord {
     openCompareFrame = () => this.frames.push(new CompareFrame(this.dragonet, TEST_LANGUAGES))
 
     @action.bound
-    openMarkupFrame = () => this.frames.push(new InitMarkupFrame(this.dragonet))
+    openMarkupFrame = (language?: Language) => this.frames.push(new InitMarkupFrame(this.dragonet, language))
 
     @action.bound
     openConceptFrame = (concept: Concept) => this.frames.push(new ConceptFrame(this.dragonet, concept))

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { LanguageStrategy } from '../../../logic/language';
 import { observer } from 'mobx-react-lite';
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     border: '1px solid rgb(41, 72, 125)',
     justifyContent: 'center',
     alignItems: 'center',
+    cursor: 'pointer',
   },
   title: {
     fontFamily: 'Impact',
@@ -53,13 +54,40 @@ const styles = StyleSheet.create({
     color: 'rgb(66, 103, 178)',
   },
 });
+interface Cell {
+  rowIndex: number;
+  columnIndex: number;
+}
 
 interface Props {
   language: Language;
+  onCellClick: (categoryCode: string, methodCode: string) => void;
+  highlightByClick?: boolean;
 }
 
-function Matrix({ language }: Props) {
+function Matrix({ language, highlightByClick, onCellClick }: Props) {
   const markupMeta = new MarkupMeta();
+  const [selectedCells, setSelectedCells] = useState<Cell[]>([]);
+
+  const selectedColor = (rowIndex: number, columnIndex: number) => {
+    if (selectedCells.find(cell => cell.rowIndex === rowIndex && cell.columnIndex === columnIndex)) {
+      return { background: 'rgb(0, 153, 116)', opacity: '0.7', };
+    }
+
+    return {};
+  };
+
+  const onClickCell = (rowIndex: number, columnIndex: number) => {
+    if (!highlightByClick) {
+      return;
+    }
+
+    if (selectedCells.some(cell => cell.rowIndex === rowIndex && cell.columnIndex === columnIndex)) {
+      setSelectedCells([...selectedCells.filter(cell => !(cell.rowIndex === rowIndex && cell.columnIndex === columnIndex))]);
+    } else {
+      setSelectedCells([...selectedCells, { rowIndex, columnIndex }]);
+    }
+  };
 
   const getConceptsByCode = (category: string, method: string) => {
     return language.concepts.filter(concept => concept.category === category && concept.method === method);
@@ -86,8 +114,16 @@ function Matrix({ language }: Props) {
                 <div key={`${category.code}-${index}`} className={css(styles.row)}>
                   <div className={css(styles.cell, styles.titleRow)}>{markupMeta.getCategoryNameByCode(category.code)}</div>
                   {
-                    markupMeta.methods.map(method =>
-                      <div key={`${method.code}-${index}`} className={css(styles.cell)} >
+                    markupMeta.methods.map((method, rowIndex) =>
+                      <div
+                        key={`${method.code}-${index}`}
+                        className={css(styles.cell)}
+                        style={selectedColor(rowIndex, index)}
+                        onClick={() => {
+                          onClickCell(rowIndex, index);
+                          onCellClick(category.code, method.code);
+                        }}
+                      >
                         {getConceptsByCode(category.code, method.code).length}
                       </div>
                     )

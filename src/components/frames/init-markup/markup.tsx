@@ -84,12 +84,16 @@ function Markup({ frame, onSave }: Props) {
           </tbody>
         </table>
 
-        <Matrix language={frame.language} />
+        <Matrix
+          language={frame.language}
+          onCellClick={frame.addSelectedCode}
+          highlightByClick={true}
+        />
 
         {
           frame.showInitConcept &&
           <div className={css(styles.concept)}>
-            <ConceptBuilder onOk={(concept) => frame.doneConcept(concept)} onCancel={frame.cancelConcept} />
+            <ConceptBuilder onOk={frame.doneConcept} onCancel={frame.cancelConcept} />
           </div>
         }
 
@@ -104,7 +108,7 @@ function Markup({ frame, onSave }: Props) {
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
           rows={
-            language.concepts.map(concept => [
+            frame.concepts.map(concept => [
               concept.name,
               markupMeta.getCategoryNameByCode(concept.category),
               markupMeta.getMethodNameByCode(concept.method),
