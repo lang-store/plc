@@ -8,6 +8,7 @@ import List from '../../tools/list';
 import Button from '../../tools/button';
 import Add from '../../tools/add';
 import { observer } from 'mobx-react-lite';
+import { Language } from '../../../models/models';
 
 const styles = StyleSheet.create({
   compare: {
@@ -56,23 +57,23 @@ const styles = StyleSheet.create({
 
 interface Props {
   frame: InitMarkupFrame;
-  onSave: () => void;
+  onSave: (language: Language) => void;
 }
 
-function Markup({ frame }: Props) {
+function Markup({ frame, onSave }: Props) {
   const { frameLord } = frame.dragonet;
 
   return (
     <div className={css(styles.info)}>
       <Card>
-        <span className={css(styles.title)}>Разметка</span>
+        <span className={css(styles.title)}>Разметка {frame.name}</span>
 
         <table className={css(styles.table)}>
           <tbody>
             <tr>
               <th className={css(styles.name)}>Язык программирования</th>
               <th>
-                <input className={css(styles.input)} />
+                <input defaultValue={frame.name} className={css(styles.input)} onChange={(e) => frame.saveName(e.target.value)} />
               </th>
             </tr>
           </tbody>
@@ -102,7 +103,7 @@ function Markup({ frame }: Props) {
         />
 
         <div className={css(styles.compare, styles.action)}>
-          <Button name={'Сохранить'} onClick={() => { }} />
+          <Button name={'Сохранить'} onClick={() => onSave({ name: frame.name, concepts: frame.concepts })} />
           <Button name={'Отмена'} onClick={() => frameLord.removeLastFrame()} />
         </div>
       </Card>

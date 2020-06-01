@@ -14,6 +14,7 @@ export interface JsonStory {
 }
 
 export interface Language {
+    name: string;
     concepts: Concept[];
 }
 

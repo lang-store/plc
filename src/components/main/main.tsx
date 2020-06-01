@@ -40,7 +40,7 @@ function Main({ dragonet }: Props) {
     }
 
     if (frame instanceof InitMarkupFrame) {
-      return <MarkupComponent frame={frame} onSave={() => { }} />;
+      return <MarkupComponent frame={frame} onSave={dragonet.addLanguage} />;
     }
 
     if (frame instanceof ConceptFrame) {

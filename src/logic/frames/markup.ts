@@ -2,6 +2,7 @@ import { Frame, Concept } from '../../models/models';
 import { observable, action } from 'mobx';
 
 export class InitMarkupFrame extends Frame {
+    @observable name: string = '';
     @observable concepts: Concept[] = [
         {
             name: 'type sym = (a, b, . . . )',
@@ -15,6 +16,8 @@ export class InitMarkupFrame extends Frame {
     ];
 
     @observable showInitConcept = false;
+
+    @action.bound saveName = (name: string) => this.name = name;
 
     @action.bound openConceptConstructor = () => this.showInitConcept = true;
 
