@@ -5,8 +5,8 @@ import { FrameLord } from './frame-lord';
 
 
 
-class Dragonet {
+export class Dragonet {
     @observable languages: Language[];
-    @observable frameLord = new FrameLord();
+    @observable frameLord = new FrameLord(this);
 
 }

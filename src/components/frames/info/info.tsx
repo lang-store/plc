@@ -3,10 +3,9 @@ import { StyleSheet, css } from 'aphrodite';
 
 import Label from '../../tools/label';
 import Text from '../../tools/text';
-import { JsonStory, Core } from '../../../models/models';
-import List from '../../tools/list';
+import { JsonStory } from '../../../models/models';
 import Button from '../../tools/button';
-import TopList from '../../about/top-list';
+import { Dragonet } from '../../../logic/dragonet';
 
 const styles = StyleSheet.create({
   compare: {
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   languages: JsonStory[];
-  core: Core;
+  core: Dragonet;
 }
 
 const abstract = `Programming Language Markup (PLM) является частью
@@ -41,8 +40,8 @@ function Info({ languages, core }: Props) {
       <Label text={`Programming Language Markup System`} />
       <Text text={abstract} />
       <div className={css(styles.compare)}>
-        <Button onClick={core.showInitMarkupFrame} name={`Добавить разметку`} />
-        <Button onClick={core.showCompareLanguagesFrame} name={`Сравнить языки программирования`} />
+        <Button onClick={core.frameLord.openMarkupFrame} name={`Добавить разметку`} />
+        <Button onClick={core.frameLord.openCompareFrame} name={`Сравнить языки программирования`} />
       </div>
       {/* <List title={'Размеченные языки'} items={['Lisp', 'Java']} onClick={() => { }} /> */}
     </div>

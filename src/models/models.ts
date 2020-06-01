@@ -1,3 +1,4 @@
+import { Dragonet } from '../logic/dragonet';
 
 export interface JsonStory {
     name: string;
@@ -12,14 +13,6 @@ export interface JsonStory {
     };
 }
 
-export interface Core {
-    showCompareLanguagesFrame: () => void;
-    showInitMarkupFrame: () => void;
-    showConceptFrame: (concept: Concept) => void;
-    removeLastFrame: () => void;
-}
-
-
 export interface Language {
     concepts: Concept[];
 }
@@ -32,24 +25,25 @@ export interface Concept {
 }
 
 export class Frame {
+    constructor(private dragonet: Dragonet) { }
 }
 
 export class InitMarkupFrame extends Frame { }
 
 export class ConceptFrame extends Frame {
-    constructor(public concept: Concept) {
-        super();
+    constructor(dragonet: Dragonet, public concept: Concept) {
+        super(dragonet);
     }
 }
 
 export class InfoFrame extends Frame {
-    constructor(public languages: JsonStory[]) {
-        super();
+    constructor(dragonet: Dragonet, public languages: JsonStory[]) {
+        super(dragonet);
     }
 }
 
 export class CompareFrame extends Frame {
-    constructor(public languages: JsonStory[]) {
-        super();
+    constructor(dragonet: Dragonet, public languages: JsonStory[]) {
+        super(dragonet);
     }
 }

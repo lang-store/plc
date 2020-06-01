@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { observer } from 'mobx-react-lite';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
@@ -6,8 +7,9 @@ import { ConceptComponent, MarkupComponent, CompareComponent, InfoComponent } fr
 import Back from '../tools/back';
 
 
-import { Frame, CompareFrame, InfoFrame, Core, InitMarkupFrame, Concept, ConceptFrame } from '../../models/models';
+import { Frame, CompareFrame, InfoFrame, InitMarkupFrame, Concept, ConceptFrame } from '../../models/models';
 import { TEST_LANGUAGES } from '../../models/metadata';
+import { Dragonet } from '../../logic/dragonet';
 
 const styles = StyleSheet.create({
   main: {
@@ -18,28 +20,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const MIN_FRAMES_LENGTH = 1;
 
-function Main() {
-  const [frames, setFrames] = useState<Frame[]>([new InfoFrame(TEST_LANGUAGES), new InitMarkupFrame()]);
-  const addFrame = (frame: Frame) => setFrames([...frames, frame]);
+interface Props {
+  dragonet: Dragonet;
+}
 
-
-  const removeLastFrame = () => {
-    const newFrames = [...frames];
-    newFrames.pop();
-    setFrames(newFrames);
-  };
-
-  const core: Core = useMemo(() => {
-    return {
-      showCompareLanguagesFrame: () => addFrame(new CompareFrame(TEST_LANGUAGES)),
-      showInitMarkupFrame: () => addFrame(new InitMarkupFrame()),
-      showConceptFrame: (concept: Concept) => addFrame(new ConceptFrame(concept)),
-      removeLastFrame,
-    };
-  }, []);
-
+function Main({ dragonet }: Props) {
 
   const renderFrames = (frame: Frame) => {
     if (!frame) {
@@ -51,31 +37,30 @@ function Main() {
     }
 
     if (frame instanceof InfoFrame) {
-      return <InfoComponent core={core} languages={frame.languages} />;
+      return <InfoComponent core={dragonet} languages={frame.languages} />;
     }
 
     if (frame instanceof InitMarkupFrame) {
-      return <MarkupComponent onSave={() => { }} core={core} />;
+      return <MarkupComponent core={dragonet} onSave={() => { }} />;
     }
 
-
     if (frame instanceof ConceptFrame) {
-      return <ConceptComponent concept={frame.concept} core={core} />;
+      return <ConceptComponent core={dragonet} concept={frame.concept} />;
     }
   };
 
   return (
     <div className={css(styles.main)}>
-      <Header onClick={() => setFrames([frames[0]])} logo={`Programming Language Markup`} />
-      {frames.length > MIN_FRAMES_LENGTH && <Back onClick={removeLastFrame} />}
+      <Header onClick={() => dragonet.frameLord.goHome()} logo={`Programming Language Markup`} />
+      {!dragonet.frameLord.isMinSize && <Back onClick={dragonet.frameLord.removeLastFrame} />}
 
       <div className={css(styles.body)}>
         {
-          renderFrames(frames.slice(-1)[0])
+          renderFrames(dragonet.frameLord.frames.slice(-1)[0])
         }
       </div>
     </div>
   );
 }
 
-export default Main;
+export default observer(Main);

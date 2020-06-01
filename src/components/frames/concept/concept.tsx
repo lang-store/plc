@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { Core, Concept } from '../../../models/models';
+import { Concept } from '../../../models/models';
 import Card from '../../tools/card';
-import Ok from '../../tools/ok';
-import Cancel from '../../tools/cancel';
-import ConceptBuilder from '../../init/concept-builder';
 import List from '../../tools/list';
-import Button from '../../tools/button';
 import Add from '../../tools/add';
+import { Dragonet } from '../../../logic/dragonet';
 
 const styles = StyleSheet.create({
   compare: {
@@ -56,7 +53,7 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  core: Core;
+  core: Dragonet;
   concept: Concept;
 }
 
