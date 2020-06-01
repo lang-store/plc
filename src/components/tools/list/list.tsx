@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { Concept } from '../../../models/models';
 
 const styles = StyleSheet.create({
   main: {
@@ -49,29 +48,28 @@ const styles = StyleSheet.create({
 
 interface Props {
   columns: string[];
-  concepts: Concept[];
-  onClick: (concept: Concept) => void;
+  rows: string[][];
+  onClick: (row: string[]) => void;
 }
 
-const List = ({ columns, concepts, onClick }: Props) =>
+const List = ({ columns, rows: items, onClick }: Props) =>
   <div className={css(styles.main)}>
     <div className={css(styles.scroll)}>
       <table className={css(styles.table)}>
         <thead>
           <tr>
             {
-              columns.map((column, index) => <th key={index} className={css(styles.name, styles.th)} >{column}</th>)
+              columns.map((column, index) => <th key={index} className={css(styles.name, styles.th)}>{column}</th>)
             }
           </tr>
         </thead>
         <tbody>
           {
-            concepts.map((concept, index) =>
-              <tr key={index} onClick={() => onClick(concept)} className={css(styles.item)}>
-                <td>{concept.name}</td>
-                <td>{concept.category}</td>
-                <td>{concept.method}</td>
-                <td>{concept.examples.length ? '***' : ''}</td>
+            items.map((row, index) =>
+              <tr key={index} onClick={() => onClick(row)} className={css(styles.item)}>
+                {
+                  row.map((item, id) => <td key={`${index}-${id}`} >{item}</td>)
+                }
               </tr>
             )
           }

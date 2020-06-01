@@ -95,11 +95,13 @@ function ConceptPage({ core, concept }: Props) {
           </div>
         }
 
-        {/* <List
-          columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
-          concepts={concepts}
-          onClick={(concept) => core.showConceptFrame(concept)}
-        /> */}
+        <List
+          columns={['Пример', 'Примечание']}
+          rows={
+            examples.map(example => [example, ''])
+          }
+          onClick={(row) => { }}
+        />
       </Card>
 
     </div>

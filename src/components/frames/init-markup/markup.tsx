@@ -67,7 +67,7 @@ function Markup({ core }: Props) {
       name: 'type sym = (a, b, . . . )',
       category: 'Вычисления (E)',
       method: 'Значения (V)',
-      examples: [],
+      examples: ['LOL'],
     },
   ]);
 
@@ -104,8 +104,10 @@ function Markup({ core }: Props) {
 
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
-          concepts={concepts}
-          onClick={(concept) => core.showConceptFrame(concept)}
+          rows={
+            concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
+          }
+          onClick={(row) => core.showConceptFrame(concepts.find(concept => concept.name === row[0]))}
         />
 
         <div className={css(styles.compare, styles.action)}>
