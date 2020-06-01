@@ -1,5 +1,10 @@
 import { Dragonet } from '../logic/dragonet';
 
+export interface MatrixItem {
+    name: string;
+    code: string;
+}
+
 export interface JsonStory {
     name: string;
     logo: string;
