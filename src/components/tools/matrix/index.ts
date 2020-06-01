@@ -1,1 +1,1 @@
-export { default } from './difficulty-matrix';
+export { default } from './matrix';

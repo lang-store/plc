@@ -9,6 +9,8 @@ import Button from '../../tools/button';
 import Add from '../../tools/add';
 import { observer } from 'mobx-react-lite';
 import { Language } from '../../../models/models';
+import Matrix from '../../tools/matrix';
+import { LanguageStrategy } from '../../../logic/language';
 
 const styles = StyleSheet.create({
   compare: {
@@ -78,6 +80,8 @@ function Markup({ frame, onSave }: Props) {
             </tr>
           </tbody>
         </table>
+
+        <Matrix languageStrategy={new LanguageStrategy({ name: frame.name, concepts: frame.concepts })} />
 
         {
           frame.showInitConcept &&

@@ -6,8 +6,8 @@ export class InitMarkupFrame extends Frame {
     @observable concepts: Concept[] = [
         {
             name: 'type sym = (a, b, . . . )',
-            category: 'Вычисления (E)',
-            method: 'Значения (V)',
+            category: 'E',
+            method: 'V',
             examples: [{
                 example: 'a+b',
                 notes: 'Это так работает'

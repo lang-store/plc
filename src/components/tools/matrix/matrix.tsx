@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     padding: '30px',
   },
   container: {
-    width: '600px',
+    width: '800px',
     textAlign: 'center',
     padding: '0px 30px 30px 30px',
     overflow: 'auto',
@@ -68,7 +68,7 @@ function Matrix({ languageStrategy }: Props) {
 
           <div className={css(styles.row, styles.titleRow)}>
             {
-              METHODS_OF_IMPLEMENTATION_SUPPORT.map(column => <div className={css(styles.cell)}>{`${column.name} (${column.code})`}</div>)
+              [undefined, ...METHODS_OF_IMPLEMENTATION_SUPPORT].map(column => <div className={css(styles.cell)}>{column && `${column.name} (${column.code})`}</div>)
             }
           </div>
 

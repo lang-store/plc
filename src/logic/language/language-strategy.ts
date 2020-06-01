@@ -9,6 +9,9 @@ export class LanguageStrategy {
     }
 
     @action.bound getConceptsByCode(category: string, method: string) {
+        console.log('this.language.concepts', this.language.concepts);
+        console.log('category', category, 'method', method);
+
         return this.language.concepts.filter(concept => concept.category === category && concept.method === method);
     }
 
