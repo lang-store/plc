@@ -1,5 +1,5 @@
 import { CATEGORYS_OF_SEMANTIC_SYSTEMS, METHODS_OF_IMPLEMENTATION_SUPPORT } from '../../models/metadata';
-import { MatrixItem } from '../../models/models';
+import { MatrixItem, Concept } from '../../models/models';
 
 export class MarkupMeta {
 
@@ -9,6 +9,14 @@ export class MarkupMeta {
 
     get methods(): MatrixItem[] {
         return METHODS_OF_IMPLEMENTATION_SUPPORT;
+    }
+
+    calculateCategoryVector = (concepts: Concept[]) => {
+        return `(${this.categorys.map(category => concepts.filter(concept => concept.category === category.code).length).join(',')})`;
+    }
+
+    calculateMethodVector = (concepts: Concept[]) => {
+        return `(${this.methods.map(method => concepts.filter(concept => concept.method === method.code).length).join(',')})`;
     }
 
     getCategoryNameByCode = (code: string) => this.getName(code, this.categorys);

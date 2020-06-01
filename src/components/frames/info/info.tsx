@@ -6,6 +6,9 @@ import Text from '../../tools/text';
 import { JsonStory } from '../../../models/models';
 import Button from '../../tools/button';
 import { Dragonet } from '../../../logic/dragonet';
+import List from '../../tools/list';
+import { InfoFrame } from '../../../logic/frames';
+import { MarkupMeta } from '../../../logic/language/meta';
 
 const styles = StyleSheet.create({
   compare: {
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   languages: JsonStory[];
-  core: Dragonet;
+  frame: InfoFrame;
 }
 
 const abstract = `Programming Language Markup (PLM) является частью
@@ -33,17 +36,32 @@ const abstract = `Programming Language Markup (PLM) является часть�
 экспертных оценок возможностей языков программирования (ЯП). В данной системе сконцетрированы представления
 наиболее важных по мнению авторов языков программирования.`;
 
-function Info({ languages, core }: Props) {
+function Info({ languages, frame }: Props) {
+  const { dragonet } = frame;
+  const markupMeta = new MarkupMeta();
 
   return (
     <div className={css(styles.info)}>
       <Label text={`Programming Language Markup System`} />
       <Text text={abstract} />
+
       <div className={css(styles.compare)}>
-        <Button onClick={core.frameLord.openMarkupFrame} name={`Добавить разметку`} />
-        <Button onClick={core.frameLord.openCompareFrame} name={`Сравнить языки программирования`} />
+        <Button onClick={dragonet.frameLord.openMarkupFrame} name={`Добавить разметку`} />
+        <Button onClick={dragonet.frameLord.openCompareFrame} name={`Сравнить языки программирования`} />
       </div>
-      {/* <List title={'Размеченные языки'} items={['Lisp', 'Java']} onClick={() => { }} /> */}
+
+      <List
+        columns={['Язык программирования', 'Категории', 'Методы', 'Число примеров']}
+        rows={
+          dragonet.languages.map(language => [
+            language.name,
+            markupMeta.calculateCategoryVector(language.concepts),
+            markupMeta.calculateMethodVector(language.concepts),
+            language.concepts.length.toString()
+          ])
+        }
+        onClick={() => { }}
+      />
     </div>
   );
 }
