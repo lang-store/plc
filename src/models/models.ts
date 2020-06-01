@@ -30,10 +30,12 @@ export interface Concept {
 }
 
 export class Frame {
-    constructor(private dragonet: Dragonet) { }
+    constructor(public dragonet: Dragonet) { }
 }
 
-export class InitMarkupFrame extends Frame { }
+export class InitMarkupFrame extends Frame {
+
+}
 
 export class ConceptFrame extends Frame {
     constructor(dragonet: Dragonet, public concept: Concept) {

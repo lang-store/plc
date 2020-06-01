@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { Concept } from '../../../models/models';
+import { Concept, InitMarkupFrame } from '../../../models/models';
 import Card from '../../tools/card';
 import ConceptBuilder from '../../init/concept-builder';
 import List from '../../tools/list';
@@ -55,11 +55,13 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  core: Dragonet;
+  frame: InitMarkupFrame;
   onSave: () => void;
 }
 
-function Markup({ core }: Props) {
+function Markup({ frame }: Props) {
+  const { frameLord } = frame.dragonet;
+
   const [showInitConcept, setShowConcept] = useState(false);
   const [concepts, setConcepts] = useState<Concept[]>([
     {
@@ -109,12 +111,12 @@ function Markup({ core }: Props) {
           rows={
             concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
           }
-          onClick={(row) => core.frameLord.openConceptFrame(concepts.find(concept => concept.name === row[0]))}
+          onClick={(row) => frameLord.openConceptFrame(concepts.find(concept => concept.name === row[0]))}
         />
 
         <div className={css(styles.compare, styles.action)}>
           <Button name={'Сохранить'} onClick={() => { }} />
-          <Button name={'Отмена'} onClick={() => core.frameLord.removeLastFrame()} />
+          <Button name={'Отмена'} onClick={() => frameLord.removeLastFrame()} />
         </div>
       </Card>
 

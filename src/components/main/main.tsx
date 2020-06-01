@@ -39,7 +39,7 @@ function Main({ dragonet }: Props) {
     }
 
     if (frame instanceof InitMarkupFrame) {
-      return <MarkupComponent core={dragonet} onSave={() => { }} />;
+      return <MarkupComponent frame={frame} onSave={() => { }} />;
     }
 
     if (frame instanceof ConceptFrame) {
