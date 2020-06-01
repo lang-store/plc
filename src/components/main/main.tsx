@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { StyleSheet, css } from 'aphrodite';
 
@@ -6,9 +6,7 @@ import Header from '../header';
 import { ConceptComponent, MarkupComponent, CompareComponent, InfoComponent } from '../frames/';
 import Back from '../tools/back';
 
-
 import { Frame, CompareFrame, InfoFrame, InitMarkupFrame, Concept, ConceptFrame } from '../../models/models';
-import { TEST_LANGUAGES } from '../../models/metadata';
 import { Dragonet } from '../../logic/dragonet';
 
 const styles = StyleSheet.create({

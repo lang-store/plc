@@ -95,7 +95,7 @@ function ConceptPage({ core, concept }: Props) {
         <List
           columns={['Пример', 'Примечание']}
           rows={
-            examples.map(example => [example, ''])
+            examples.map(example => [example.example, example.notes])
           }
           onClick={(row) => { }}
         />

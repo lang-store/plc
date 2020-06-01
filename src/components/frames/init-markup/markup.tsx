@@ -3,8 +3,6 @@ import { StyleSheet, css } from 'aphrodite';
 
 import { Concept } from '../../../models/models';
 import Card from '../../tools/card';
-import Ok from '../../tools/ok';
-import Cancel from '../../tools/cancel';
 import ConceptBuilder from '../../init/concept-builder';
 import List from '../../tools/list';
 import Button from '../../tools/button';
@@ -68,7 +66,10 @@ function Markup({ core }: Props) {
       name: 'type sym = (a, b, . . . )',
       category: 'Вычисления (E)',
       method: 'Значения (V)',
-      examples: ['LOL'],
+      examples: [{
+        example: 'a+b',
+        notes: 'Это так работает'
+      }],
     },
   ]);
 

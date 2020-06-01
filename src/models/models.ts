@@ -17,11 +17,16 @@ export interface Language {
     concepts: Concept[];
 }
 
+export interface ConceptExample {
+    example: string;
+    notes: string;
+}
+
 export interface Concept {
     name: string;
     category: string;
     method: string;
-    examples: string[];
+    examples: ConceptExample[];
 }
 
 export class Frame {
