@@ -20,6 +20,10 @@ export interface Core {
 }
 
 
+export interface Language {
+    concepts: Concept[];
+}
+
 export interface Concept {
     name: string;
     category: string;

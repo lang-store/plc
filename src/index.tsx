@@ -2,7 +2,7 @@ import React, { ComponentType } from 'react';
 import ReactDOM from 'react-dom';
 
 
-import Main from './components/main';
+import StartPage from './pages/start-page';
 
 function render(Component: ComponentType<{}>) {
   ReactDOM.render(
@@ -11,7 +11,7 @@ function render(Component: ComponentType<{}>) {
   );
 }
 
-render(Main);
+render(StartPage);
 
 if (module.hot) {
   module.hot.accept(['./components/main'], () => render(require('./components/main').default));
