@@ -5,7 +5,9 @@ import { Concept } from '../../../models/models';
 import Card from '../../tools/card';
 import List from '../../tools/list';
 import Add from '../../tools/add';
-import { Dragonet } from '../../../logic/dragonet';
+import ExampleBuilder from '../../init/example-builder';
+import { ConceptFrame } from '../../../logic/frames';
+import { observer } from 'mobx-react-lite';
 
 const styles = StyleSheet.create({
   compare: {
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: '5px',
     border: '1px solid rgb(66, 103, 178)'
   },
-  concept: {
+  example: {
     padding: '30px',
   },
   action: {
@@ -53,13 +55,11 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  core: Dragonet;
+  frame: ConceptFrame;
   concept: Concept;
 }
 
-function ConceptPage({ core, concept }: Props) {
-  const [showAddExample, setShowAddExample] = useState(false);
-  const [examples, setExamples] = useState(concept.examples);
+function ConceptPage({ frame, concept }: Props) {
 
   return (
     <div className={css(styles.info)}>
@@ -71,23 +71,23 @@ function ConceptPage({ core, concept }: Props) {
             <tr>
               <th className={css(styles.name)}>Наименование</th>
               <th>
-                <input defaultValue={concept.name} className={css(styles.input)} />
+                <input defaultValue={concept.name} className={css(styles.input)} onChange={(e) => frame.saveName(e.target.value)} />
               </th>
             </tr>
           </tbody>
         </table>
 
         {
-          showAddExample &&
-          <div className={css(styles.concept)}>
-            {/* <ConceptBuilder onOk={(concept) => { setConcepts([...concepts, concept]); setShowConcept(false); }} onCancel={() => setShowConcept(false)} /> */}
+          frame.showExampleConstructor &&
+          <div className={css(styles.example)}>
+            <ExampleBuilder onOk={(example) => frame.doneExample(example)} onCancel={frame.cancelExample} />
           </div>
         }
 
         {
-          !showAddExample &&
+          !frame.showExampleConstructor &&
           <div className={css(styles.compare)}>
-            <Add onClick={() => setShowAddExample(true)} />
+            <Add onClick={frame.openExampleConstructor} />
             <span className={css(styles.name)}>Добавить пример</span>
           </div>
         }
@@ -95,7 +95,7 @@ function ConceptPage({ core, concept }: Props) {
         <List
           columns={['Пример', 'Примечание']}
           rows={
-            examples.map(example => [example.example, example.notes])
+            frame.concept.examples.map(example => [example.example, example.notes])
           }
           onClick={(row) => { }}
         />
@@ -105,4 +105,4 @@ function ConceptPage({ core, concept }: Props) {
   );
 }
 
-export default ConceptPage;
+export default observer(ConceptPage);

@@ -44,7 +44,7 @@ function Main({ dragonet }: Props) {
     }
 
     if (frame instanceof ConceptFrame) {
-      return <ConceptComponent core={dragonet} concept={frame.concept} />;
+      return <ConceptComponent frame={frame} concept={frame.concept} />;
     }
   };
 

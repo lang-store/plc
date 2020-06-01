@@ -96,7 +96,7 @@ function Markup({ frame }: Props) {
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
           rows={
-            frame.concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
+            frame.concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length.toString()])
           }
           onClick={(row) => frameLord.openConceptFrame(frame.concepts.find(concept => concept.name === row[0]))}
         />
