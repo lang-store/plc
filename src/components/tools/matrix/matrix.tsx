@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { LanguageStrategy } from '../../../logic/language';
 import { observer } from 'mobx-react-lite';
 import { MarkupMeta } from '../../../logic/language/meta';
 import { Language } from '../../../models/models';

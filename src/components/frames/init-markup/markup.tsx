@@ -10,7 +10,6 @@ import Add from '../../tools/add';
 import { observer } from 'mobx-react-lite';
 import { Language } from '../../../models/models';
 import Matrix from '../../tools/matrix';
-import { LanguageStrategy } from '../../../logic/language';
 import { MarkupMeta } from '../../../logic/language/meta';
 
 const styles = StyleSheet.create({
