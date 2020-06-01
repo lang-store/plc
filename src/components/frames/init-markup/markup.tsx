@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { Concept } from '../../../models/models';
 import { InitMarkupFrame } from '../../../logic/frames';
 import Card from '../../tools/card';
 import ConceptBuilder from '../../init/concept-builder';
 import List from '../../tools/list';
 import Button from '../../tools/button';
 import Add from '../../tools/add';
+import { observer } from 'mobx-react-lite';
 
 const styles = StyleSheet.create({
   compare: {
@@ -62,19 +62,6 @@ interface Props {
 function Markup({ frame }: Props) {
   const { frameLord } = frame.dragonet;
 
-  const [showInitConcept, setShowConcept] = useState(false);
-  const [concepts, setConcepts] = useState<Concept[]>([
-    {
-      name: 'type sym = (a, b, . . . )',
-      category: 'Вычисления (E)',
-      method: 'Значения (V)',
-      examples: [{
-        example: 'a+b',
-        notes: 'Это так работает'
-      }],
-    },
-  ]);
-
   return (
     <div className={css(styles.info)}>
       <Card>
@@ -92,16 +79,16 @@ function Markup({ frame }: Props) {
         </table>
 
         {
-          showInitConcept &&
+          frame.showInitConcept &&
           <div className={css(styles.concept)}>
-            <ConceptBuilder onOk={(concept) => { setConcepts([...concepts, concept]); setShowConcept(false); }} onCancel={() => setShowConcept(false)} />
+            <ConceptBuilder onOk={(concept) => frame.doneConcept(concept)} onCancel={frame.cancelConcept} />
           </div>
         }
 
         {
-          !showInitConcept &&
+          !frame.showInitConcept &&
           <div className={css(styles.compare)}>
-            <Add onClick={() => setShowConcept(true)} />
+            <Add onClick={frame.openConceptConstructor} />
             <span className={css(styles.name)}>Добавить понятие</span>
           </div>
         }
@@ -109,9 +96,9 @@ function Markup({ frame }: Props) {
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
           rows={
-            concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
+            frame.concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
           }
-          onClick={(row) => frameLord.openConceptFrame(concepts.find(concept => concept.name === row[0]))}
+          onClick={(row) => frameLord.openConceptFrame(frame.concepts.find(concept => concept.name === row[0]))}
         />
 
         <div className={css(styles.compare, styles.action)}>
@@ -124,4 +111,4 @@ function Markup({ frame }: Props) {
   );
 }
 
-export default Markup;
+export default observer(Markup);

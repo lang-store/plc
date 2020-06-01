@@ -1,7 +1,8 @@
 import { observable, action, computed, } from 'mobx';
-import { Frame, CompareFrame, InitMarkupFrame, Concept, ConceptFrame, InfoFrame } from '../models/models';
+import { Frame, Concept, } from '../models/models';
 import { TEST_LANGUAGES } from '../models/metadata';
 import { Dragonet } from './dragonet';
+import { InfoFrame, CompareFrame, InitMarkupFrame, ConceptFrame } from './frames';
 
 const MIN_FRAMES_LENGTH = 1;
 
