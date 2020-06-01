@@ -32,25 +32,3 @@ export interface Concept {
 export class Frame {
     constructor(public dragonet: Dragonet) { }
 }
-
-export class InitMarkupFrame extends Frame {
-
-}
-
-export class ConceptFrame extends Frame {
-    constructor(dragonet: Dragonet, public concept: Concept) {
-        super(dragonet);
-    }
-}
-
-export class InfoFrame extends Frame {
-    constructor(dragonet: Dragonet, public languages: JsonStory[]) {
-        super(dragonet);
-    }
-}
-
-export class CompareFrame extends Frame {
-    constructor(dragonet: Dragonet, public languages: JsonStory[]) {
-        super(dragonet);
-    }
-}

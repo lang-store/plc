@@ -6,8 +6,9 @@ import Header from '../header';
 import { ConceptComponent, MarkupComponent, CompareComponent, InfoComponent } from '../frames/';
 import Back from '../tools/back';
 
-import { Frame, CompareFrame, InfoFrame, InitMarkupFrame, Concept, ConceptFrame } from '../../models/models';
+import { Frame, } from '../../models/models';
 import { Dragonet } from '../../logic/dragonet';
+import { CompareFrame, ConceptFrame, InitMarkupFrame, InfoFrame } from '../../logic/frames';
 
 const styles = StyleSheet.create({
   main: {

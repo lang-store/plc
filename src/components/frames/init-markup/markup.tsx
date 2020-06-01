@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { Concept, InitMarkupFrame } from '../../../models/models';
+import { Concept } from '../../../models/models';
+import { InitMarkupFrame } from '../../../logic/frames';
 import Card from '../../tools/card';
 import ConceptBuilder from '../../init/concept-builder';
 import List from '../../tools/list';
 import Button from '../../tools/button';
 import Add from '../../tools/add';
-import { Dragonet } from '../../../logic/dragonet';
 
 const styles = StyleSheet.create({
   compare: {
