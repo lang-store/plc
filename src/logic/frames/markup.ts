@@ -15,12 +15,14 @@ export class InitMarkupFrame extends Frame {
 
     @observable selectedCodes: CodeSelect[] = [];
     @observable showInitConcept = false;
+    @observable isRewrite = false;
 
     constructor(dragonet: Dragonet, language?: Language) {
         super(dragonet);
 
         if (language) {
             this.language = language;
+            this.isRewrite = true;
         }
     }
 

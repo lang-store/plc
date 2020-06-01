@@ -117,10 +117,18 @@ function Markup({ frame, onSave }: Props) {
           onClick={(row) => frameLord.openConceptFrame(language.concepts.find(concept => concept.name === row[0]))}
         />
 
-        <div className={css(styles.compare, styles.action)}>
-          <Button name={'Сохранить'} onClick={() => onSave({ name: language.name, concepts: language.concepts })} />
-          <Button name={'Отмена'} onClick={() => frameLord.removeLastFrame()} />
-        </div>
+        {
+          !frame.isRewrite && <div className={css(styles.compare, styles.action)}>
+            <Button
+              name={'Сохранить'}
+              onClick={() => {
+                onSave({ name: language.name, concepts: language.concepts });
+                frameLord.removeLastFrame();
+              }}
+            />
+            <Button name={'Отмена'} onClick={() => frameLord.removeLastFrame()} />
+          </div>
+        }
       </Card>
 
     </div>
