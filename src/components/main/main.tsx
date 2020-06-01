@@ -5,7 +5,7 @@ import Header from '../header';
 import CompareLanguages from '../frames/compare-languages';
 import Info from '../frames/info';
 
-import { Frame, CompareFrame, InfoFrame, Core, InitMarkupFrame } from '../../models/models';
+import { Frame, CompareFrame, InfoFrame, Core, InitMarkupFrame, Concept, ConceptFrame } from '../../models/models';
 import { TEST_LANGUAGES } from '../../models/metadata';
 import Back from '../tools/back';
 import Markup from '../frames/init-markup';
@@ -36,6 +36,7 @@ function Main() {
     return {
       showCompareLanguagesFrame: () => addFrame(new CompareFrame(TEST_LANGUAGES)),
       showInitMarkupFrame: () => addFrame(new InitMarkupFrame()),
+      showConceptFrame: (concept: Concept) => addFrame(new ConceptFrame(concept)),
       removeLastFrame,
     };
   }, []);

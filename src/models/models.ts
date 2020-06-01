@@ -15,6 +15,7 @@ export interface JsonStory {
 export interface Core {
     showCompareLanguagesFrame: () => void;
     showInitMarkupFrame: () => void;
+    showConceptFrame: (concept: Concept) => void;
     removeLastFrame: () => void;
 }
 
@@ -30,6 +31,12 @@ export class Frame {
 }
 
 export class InitMarkupFrame extends Frame { }
+
+export class ConceptFrame extends Frame {
+    constructor(public concept: Concept) {
+        super();
+    }
+}
 
 export class InfoFrame extends Frame {
     constructor(public languages: JsonStory[]) {
