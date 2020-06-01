@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { Concept } from '../../../models/models';
 
 const styles = StyleSheet.create({
   main: {
@@ -48,28 +49,29 @@ const styles = StyleSheet.create({
 
 interface Props {
   columns: string[];
-  rows: string[][];
-  onClick: () => void;
+  concepts: Concept[];
+  onClick: (concept: Concept) => void;
 }
 
-const List = ({ columns, rows: items, onClick }: Props) =>
+const List = ({ columns, concepts, onClick }: Props) =>
   <div className={css(styles.main)}>
-    <div  className={css(styles.scroll)}>
+    <div className={css(styles.scroll)}>
       <table className={css(styles.table)}>
         <thead>
           <tr>
             {
-              columns.map(column => <th className={css(styles.name, styles.th)} >{column}</th>)
+              columns.map((column, index) => <th key={index} className={css(styles.name, styles.th)} >{column}</th>)
             }
           </tr>
         </thead>
         <tbody>
           {
-            items.map(row =>
-              <tr  className={css(styles.item)}>
-                {
-                  row.map(item => <td>{item}</td>)
-                }
+            concepts.map((concept, index) =>
+              <tr key={index} onClick={() => onClick(concept)} className={css(styles.item)}>
+                <td>{concept.name}</td>
+                <td>{concept.category}</td>
+                <td>{concept.method}</td>
+                <td>{concept.examples.length ? '***' : ''}</td>
               </tr>
             )
           }

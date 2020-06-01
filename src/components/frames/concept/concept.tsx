@@ -61,52 +61,45 @@ interface Props {
 }
 
 function ConceptPage({ core, concept }: Props) {
-  const [showInitConcept, setShowConcept] = useState(false);
-  const [concepts, setConcepts] = useState<Concept[]>([
-    {
-      name: 'type sym = (a, b, . . . )',
-      category: 'Вычисления (E)',
-      method: 'Значения (V)',
-      examples: [],
-    },
-  ]);
+  const [showAddExample, setShowAddExample] = useState(false);
+  const [examples, setExamples] = useState(concept.examples);
 
   return (
     <div className={css(styles.info)}>
       <Card>
-        <span className={css(styles.title)}>Разметка</span>
+        <span className={css(styles.title)}>Понятие</span>
 
         <table className={css(styles.table)}>
-          <tr>
-            <th className={css(styles.name)}>Язык программирования</th>
-            <th>
-              <input className={css(styles.input)} />
-            </th>
-          </tr>
+          <tbody>
+            <tr>
+              <th className={css(styles.name)}>Наименование</th>
+              <th>
+                <input defaultValue={concept.name} className={css(styles.input)} />
+              </th>
+            </tr>
+          </tbody>
         </table>
 
         {
-          showInitConcept &&
+          showAddExample &&
           <div className={css(styles.concept)}>
-            <ConceptBuilder onOk={(concept) => { setConcepts([...concepts, concept]); setShowConcept(false); }} onCancel={() => setShowConcept(false)} />
+            {/* <ConceptBuilder onOk={(concept) => { setConcepts([...concepts, concept]); setShowConcept(false); }} onCancel={() => setShowConcept(false)} /> */}
           </div>
         }
 
         {
-          !showInitConcept &&
+          !showAddExample &&
           <div className={css(styles.compare)}>
-            <Add onClick={() => setShowConcept(true)} />
-            <span className={css(styles.name)}>Добавить понятие</span>
+            <Add onClick={() => setShowAddExample(true)} />
+            <span className={css(styles.name)}>Добавить пример</span>
           </div>
         }
 
-        <List
+        {/* <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
-          rows={
-            concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
-          }
-          onClick={() => { }}
-        />
+          concepts={concepts}
+          onClick={(concept) => core.showConceptFrame(concept)}
+        /> */}
       </Card>
 
     </div>

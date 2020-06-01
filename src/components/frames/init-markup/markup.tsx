@@ -77,12 +77,14 @@ function Markup({ core }: Props) {
         <span className={css(styles.title)}>Разметка</span>
 
         <table className={css(styles.table)}>
-          <tr>
-            <th className={css(styles.name)}>Язык программирования</th>
-            <th>
-              <input className={css(styles.input)} />
-            </th>
-          </tr>
+          <tbody>
+            <tr>
+              <th className={css(styles.name)}>Язык программирования</th>
+              <th>
+                <input className={css(styles.input)} />
+              </th>
+            </tr>
+          </tbody>
         </table>
 
         {
@@ -102,10 +104,8 @@ function Markup({ core }: Props) {
 
         <List
           columns={['Понятие', 'Категория', 'Метод', 'Примеры']}
-          rows={
-            concepts.map(concept => [concept.name, concept.category, concept.method, concept.examples.length ? '***' : ''])
-          }
-          onClick={() => { }}
+          concepts={concepts}
+          onClick={(concept) => core.showConceptFrame(concept)}
         />
 
         <div className={css(styles.compare, styles.action)}>

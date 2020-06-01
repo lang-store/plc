@@ -2,13 +2,12 @@ import React, { useState, useMemo } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
-import CompareLanguages from '../frames/compare-languages';
-import Info from '../frames/info';
+import { ConceptComponent, MarkupComponent, CompareComponent, InfoComponent } from '../frames/';
+import Back from '../tools/back';
+
 
 import { Frame, CompareFrame, InfoFrame, Core, InitMarkupFrame, Concept, ConceptFrame } from '../../models/models';
 import { TEST_LANGUAGES } from '../../models/metadata';
-import Back from '../tools/back';
-import Markup from '../frames/init-markup';
 
 const styles = StyleSheet.create({
   main: {
@@ -48,15 +47,20 @@ function Main() {
     }
 
     if (frame instanceof CompareFrame) {
-      return <CompareLanguages languages={frame.languages} />;
+      return <CompareComponent languages={frame.languages} />;
     }
 
     if (frame instanceof InfoFrame) {
-      return <Info core={core} languages={frame.languages} />;
+      return <InfoComponent core={core} languages={frame.languages} />;
     }
 
     if (frame instanceof InitMarkupFrame) {
-      return <Markup onSave={() => { }} core={core} />;
+      return <MarkupComponent onSave={() => { }} core={core} />;
+    }
+
+
+    if (frame instanceof ConceptFrame) {
+      return <ConceptComponent concept={frame.concept} core={core} />;
     }
   };
 
