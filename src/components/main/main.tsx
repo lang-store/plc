@@ -3,12 +3,13 @@ import { observer } from 'mobx-react-lite';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../header';
-import { ConceptComponent, MarkupComponent, CompareComponent, InfoComponent } from '../frames/';
+import { ConceptComponent, MarkupComponent, CompareComponent, InfoComponent, ComparisonComponent } from '../frames/';
 import Back from '../tools/back';
 
 import { Frame, } from '../../models/models';
 import { Dragonet } from '../../logic/dragonet';
 import { CompareFrame, ConceptFrame, InitMarkupFrame, InfoFrame } from '../../logic/frames';
+import { ComparisonFrame } from '../../logic/frames/comparison';
 
 const styles = StyleSheet.create({
   main: {
@@ -45,6 +46,10 @@ function Main({ dragonet }: Props) {
 
     if (frame instanceof ConceptFrame) {
       return <ConceptComponent frame={frame} concept={frame.concept} />;
+    }
+
+    if (frame instanceof ComparisonFrame) {
+      return <ComparisonComponent frame={frame} />;
     }
   };
 

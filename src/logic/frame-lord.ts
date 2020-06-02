@@ -3,6 +3,7 @@ import { Frame, Concept, Language, } from '../models/models';
 import { TEST_LANGUAGES } from '../models/metadata';
 import { Dragonet } from './dragonet';
 import { InfoFrame, CompareFrame, InitMarkupFrame, ConceptFrame } from './frames';
+import { ComparisonFrame } from './frames/comparison';
 
 const MIN_FRAMES_LENGTH = 1;
 
@@ -23,6 +24,9 @@ export class FrameLord {
 
     @action.bound
     openConceptFrame = (concept: Concept) => this.frames.push(new ConceptFrame(this.dragonet, concept))
+
+    @action.bound
+    openComparisonFrame = () => this.frames.push(new ComparisonFrame(this.dragonet, this.dragonet.languages))
 
     @action.bound
     removeLastFrame = () => this.frames.pop()

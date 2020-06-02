@@ -50,6 +50,7 @@ function Info({ languages, frame }: Props) {
       <div className={css(styles.compare)}>
         <Button onClick={() => frameLord.openMarkupFrame()} name={`Добавить разметку`} />
         <Button onClick={() => frameLord.openCompareFrame()} name={`Сравнить языки программирования`} />
+        <Button onClick={() => frameLord.openComparisonFrame()} name={`Сравнить языки программирования 2.0`} />
       </div>
 
       <List

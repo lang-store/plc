@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import { JsonStory, Core } from '../../../models/models';
+import { JsonStory } from '../../../models/models';
 import { COLUMN_NAMES } from '../../../models/metadata';
 
 const styles = StyleSheet.create({

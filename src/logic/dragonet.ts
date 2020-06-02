@@ -6,15 +6,29 @@ import { FrameLord } from './frame-lord';
 export class Dragonet {
     @observable languages: Language[] = [
         {
+            name: 'Паскаль',
+            concepts: [
+                {
+                    name: 'Ключевое слово',
+                    category: 'E',
+                    method: 'C',
+                    examples: [{
+                        example: 's_star:= s_nov',
+                        notes: 'С точностью до пространства возможных схем вычислений'
+                    }],
+                }
+            ]
+        },
+        {
             name: 'Lisp',
             concepts: [
                 {
                     name: 'type sym = (a, b, . . . )',
                     category: 'E',
-                    method: 'V',
+                    method: 'C',
                     examples: [{
-                        example: 'a+b',
-                        notes: 'Это так работает'
+                        example: 'NIL',
+                        notes: 'С точностью до пространства возможных схем вычислений'
                     }],
                 }
             ]
