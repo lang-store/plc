@@ -84,7 +84,7 @@ function Markup({ frame, onSave }: Props) {
         </table>
 
         <Matrix
-          language={frame.language}
+          languages={[frame.language]}
           onCellClick={frame.addSelectedCode}
           highlightByClick={true}
         />

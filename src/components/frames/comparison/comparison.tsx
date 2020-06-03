@@ -6,6 +6,7 @@ import { ComparisonFrame } from '../../../logic/frames/comparison';
 import List from '../../tools/list';
 import { MarkupMeta } from '../../../logic/language/meta';
 import Matrix from '../../tools/matrix';
+import { observer } from 'mobx-react-lite';
 
 const styles = StyleSheet.create({
   compare: {
@@ -48,15 +49,7 @@ function ComparisonComponent({ frame }: Props) {
   const { frameLord } = frame.dragonet;
   const markupMeta = new MarkupMeta();
 
-  const conceptA = useMemo(() =>
-    languages[0].concepts.filter(concept => concept.category === markupMeta.categorys[0].code && concept.method === markupMeta.methods[0].code),
-    []
-  );
-
-  const conceptB = useMemo(() =>
-    languages[1].concepts.filter(concept => concept.category === markupMeta.categorys[0].code && concept.method === markupMeta.methods[0].code),
-    []
-  );
+  const showConcepts = useMemo(() => frame.conceptsToList, [frame.conceptsToList, frame.selectedCodes.length]);
 
   return (
     <Fragment>
@@ -90,27 +83,19 @@ function ComparisonComponent({ frame }: Props) {
       </div>
 
       <Matrix
-        language={languages[0]}
-        onCellClick={() => { }}
+        languages={languages}
+        onCellClick={frame.addSelectedCode}
+        highlightByClick={true}
       />
 
-      {
-        <List
-          columns={[`Понятие ${languages[0].name}`, `Понятие ${languages[1].name}`, `Примеры ${languages[0].name}`, `Примеры ${languages[1].name}`]}
-          rows={
-            conceptA.map((concept, index) => [
-              concept.name,
-              conceptB[index] && conceptB[index].name,
-              concept.examples.length.toString(),
-              conceptB[index] && conceptB[index].examples.length.toString(),
-            ])
-          }
-          onClick={(row) => frameLord.openConceptFrame(languages[0].concepts.find(concept => concept.name === row[0]))}
-        />
-      }
+      <List
+        columns={[...languages.map(language => `Понятие ${language.name}`), ...languages.map(language => `Примеры ${language.name}`)]}
+        rows={showConcepts}
+        onClick={(row) => frameLord.openConceptFrame(languages[0].concepts.find(concept => concept.name === row[0]))}
+      />
 
     </Fragment>
   );
 }
 
-export default ComparisonComponent;
+export default observer(ComparisonComponent);

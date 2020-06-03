@@ -59,12 +59,12 @@ interface Cell {
 }
 
 interface Props {
-  language: Language;
+  languages: Language[];
   onCellClick: (categoryCode: string, methodCode: string) => void;
   highlightByClick?: boolean;
 }
 
-function Matrix({ language, highlightByClick, onCellClick }: Props) {
+function Matrix({ languages, highlightByClick, onCellClick }: Props) {
   const markupMeta = new MarkupMeta();
   const [selectedCells, setSelectedCells] = useState<Cell[]>([]);
 
@@ -88,15 +88,17 @@ function Matrix({ language, highlightByClick, onCellClick }: Props) {
     }
   };
 
-  const getConceptsByCode = (category: string, method: string) => {
-    return language.concepts.filter(concept => concept.category === category && concept.method === method);
+  const getConceptsLengthByCode = (category: string, method: string) => {
+    return languages
+      .map(language => language.concepts.filter(concept => concept.category === category && concept.method === method).length)
+      .join('/');
   };
 
   return (
     <div className={css(styles.main)}>
       <div className={css(styles.container)}>
 
-        <span className={css(styles.title)}>{language.name}</span>
+        <span className={css(styles.title)}>{languages.map(language => language.name).join('/')}</span>
         <div className={css(styles.tbl)}>
 
           <div className={css(styles.row, styles.titleRow)}>
@@ -123,7 +125,7 @@ function Matrix({ language, highlightByClick, onCellClick }: Props) {
                           onCellClick(category.code, method.code);
                         }}
                       >
-                        {getConceptsByCode(category.code, method.code).length}
+                        {getConceptsLengthByCode(category.code, method.code)}
                       </div>
                     )
                   }
