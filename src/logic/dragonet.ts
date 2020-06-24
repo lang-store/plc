@@ -2,6 +2,7 @@ import { observable, action, } from 'mobx';
 
 import { Language } from '../models/models';
 import { FrameLord } from './frame-lord';
+import { Api } from './api/api';
 
 export class Dragonet {
     @observable languages: Language[] = [
@@ -34,7 +35,12 @@ export class Dragonet {
             ]
         },
     ];
+
+    @observable api = new Api();
+
     @observable frameLord = new FrameLord(this);
 
     @action.bound addLanguage = (language: Language) => this.languages.push(language);
+
+    @action.bound refreshData = async () => this.languages = await this.api.getLanguages();
 }

@@ -5,10 +5,10 @@ import Label from '../../tools/label';
 import Text from '../../tools/text';
 import { JsonStory } from '../../../models/models';
 import Button from '../../tools/button';
-import { Dragonet } from '../../../logic/dragonet';
 import List from '../../tools/list';
 import { InfoFrame } from '../../../logic/frames';
 import { MarkupMeta } from '../../../logic/language/meta';
+import { observer } from 'mobx-react-lite';
 
 const styles = StyleSheet.create({
   compare: {
@@ -48,6 +48,7 @@ function Info({ languages, frame }: Props) {
       <Text text={abstract} />
 
       <div className={css(styles.compare)}>
+        <Button onClick={() => dragonet.refreshData()} name={`Обновить данные`} />
         <Button onClick={() => frameLord.openMarkupFrame()} name={`Добавить разметку`} />
         <Button onClick={() => frameLord.openCompareFrame()} name={`Сравнить языки программирования`} />
         <Button onClick={() => frameLord.openComparisonFrame()} name={`Сравнить языки программирования 2.0`} />
@@ -74,4 +75,4 @@ function Info({ languages, frame }: Props) {
   );
 }
 
-export default Info;
+export default observer(Info);
