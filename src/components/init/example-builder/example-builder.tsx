@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
     boxShadow: '0.2em 0em 15px rgba(122,122,122,0.7)',
   },
   input: {
-    textAlign: 'center',
-    width: '250px',
+    minWidth: '250px',
     minHeight: '30px',
     padding: '0',
     borderRadius: '5px',
@@ -47,13 +46,13 @@ const ExampleBuilder = ({ onOk, onCancel }: Props) => {
         <tr>
           <th className={css(styles.name, styles.th)}>Пример</th>
           <th className={css(styles.th)}>
-            <input className={css(styles.input)} onChange={(e) => setExample(e.target.value)} />
+            <textarea className={css(styles.input)} onChange={(e) => setExample(e.target.value)} />
           </th>
         </tr>
         <tr>
           <th className={css(styles.name, styles.th)}>Примечание</th>
           <th className={css(styles.th)}>
-            <input className={css(styles.input)} onChange={(e) => setNotes(e.target.value)} />
+            <textarea className={css(styles.input)} onChange={(e) => setNotes(e.target.value)} />
           </th>
         </tr>
 

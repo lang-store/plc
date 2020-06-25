@@ -58,7 +58,7 @@ const ConceptBuilder = ({ onOk, onCancel }: Props) => {
           <th className={css(styles.th)}>
             <select className={css(styles.input)} onChange={(c) => setCategory(c.target.value)}>
               {
-                markupMeta.categorys.map(ctg => <option value={ctg.code}>{markupMeta.getCategoryNameByCode(ctg.code)}</option>)
+                markupMeta.categorys.map(ctg => <option key={ctg.code} value={ctg.code}>{markupMeta.getCategoryNameByCode(ctg.code)}</option>)
               }
             </select>
           </th>
@@ -68,7 +68,7 @@ const ConceptBuilder = ({ onOk, onCancel }: Props) => {
           <th className={css(styles.th)}>
             <select className={css(styles.input)} onChange={(c) => setMethod(c.target.value)}>
               {
-                markupMeta.methods.map(mthd => <option value={mthd.code}>{markupMeta.getMethodNameByCode(mthd.code)}</option>)
+                markupMeta.methods.map(mthd => <option key={mthd.code} value={mthd.code}>{markupMeta.getMethodNameByCode(mthd.code)}</option>)
               }
             </select>
           </th>

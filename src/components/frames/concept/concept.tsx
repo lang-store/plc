@@ -71,7 +71,12 @@ function ConceptPage({ frame, concept }: Props) {
             <tr>
               <th className={css(styles.name)}>Наименование</th>
               <th>
-                <input defaultValue={concept.name} className={css(styles.input)} onChange={(e) => frame.saveName(e.target.value)} />
+                <input
+                  defaultValue={concept.name}
+                  className={css(styles.input)}
+                  onChange={(e) => frame.saveLocalName(e.target.value)}
+                  onBlur={frame.saveConcept}
+                />
               </th>
             </tr>
           </tbody>

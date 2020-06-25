@@ -77,7 +77,12 @@ function Markup({ frame, onSave }: Props) {
             <tr>
               <th className={css(styles.name)}>Язык программирования</th>
               <th>
-                <input defaultValue={language.name} className={css(styles.input)} onChange={(e) => frame.saveName(e.target.value)} />
+                <input
+                  defaultValue={language.name}
+                  className={css(styles.input)}
+                  onChange={(e) => frame.saveLocalName(e.target.value)}
+                  onBlur={frame.saveLanguage}
+                />
               </th>
             </tr>
           </tbody>

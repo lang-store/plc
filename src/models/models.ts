@@ -19,16 +19,21 @@ export interface JsonStory {
 }
 
 export interface Language {
+    id?: number;
     name: string;
     concepts: Concept[];
 }
 
 export interface ConceptExample {
+    id?: number;
+    conceptId?: number;
     example: string;
     notes: string;
 }
 
 export interface Concept {
+    id?: number;
+    languageId?: number;
     name: string;
     category: string;
     method: string;

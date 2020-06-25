@@ -52,11 +52,22 @@ export class InitMarkupFrame extends Frame {
         }
     }
 
-    @action.bound saveName = (name: string) => this.language.name = name;
+    @action.bound saveLocalName = (name: string) => this.language.name = name;
 
     @action.bound openConceptConstructor = () => this.showInitConcept = true;
 
-    @action.bound doneConcept(concept: Concept) {
+    @action.bound async saveLanguage() {
+        const { blizzard, api } = this.dragonet;
+        await blizzard.doInBackground(api.putLanguage)(this.language);
+    }
+
+    @action.bound async doneConcept(concept: Concept) {
+        const { blizzard, api } = this.dragonet;
+
+        concept.languageId = this.language.id;
+
+        await blizzard.doInBackground(api.pushConcept)(concept);
+
         this.language.concepts.push(concept);
         this.showInitConcept = false;
     }

@@ -1,4 +1,4 @@
-import { Language } from '../../models/models';
+import { Language, Concept, ConceptExample } from '../../models/models';
 
 
 export class Api {
@@ -26,6 +26,90 @@ export class Api {
         }
 
         return [];
+    }
+
+    putLanguage = async (language: Language) => {
+        const url = `${this.url}/languages`;
+
+        try {
+            await fetch(
+                url,
+                {
+                    method: 'put',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(language)
+                }
+            );
+
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+    pushConcept = async (concept: Concept) => {
+        const url = `${this.url}/concepts`;
+
+        try {
+            await fetch(
+                url,
+                {
+                    method: 'post',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(concept)
+                }
+            );
+
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+    putConcept = async (concept: Concept) => {
+        const url = `${this.url}/concepts`;
+
+        try {
+            await fetch(
+                url,
+                {
+                    method: 'put',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(concept)
+                }
+            );
+
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+    pushExample = async (example: ConceptExample) => {
+        const url = `${this.url}/examples`;
+
+        try {
+            await fetch(
+                url,
+                {
+                    method: 'post',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(example)
+                }
+            );
+
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
 }

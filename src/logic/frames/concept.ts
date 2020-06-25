@@ -11,11 +11,22 @@ export class ConceptFrame extends Frame {
         this.concept = concept;
     }
 
-    @action.bound saveName = (name: string) => this.concept.name = name;
+    @action.bound saveLocalName = (name: string) => this.concept.name = name;
+
+    @action.bound async saveConcept() {
+        const { blizzard, api } = this.dragonet;
+        await blizzard.doInBackground(api.putConcept)(this.concept);
+    }
 
     @action.bound openExampleConstructor = () => this.showExampleConstructor = true;
 
-    @action.bound doneExample(example: ConceptExample) {
+    @action.bound async doneExample(example: ConceptExample) {
+        const { blizzard, api } = this.dragonet;
+
+        example.conceptId = this.concept.id;
+
+        await blizzard.doInBackground(api.pushExample)(example);
+
         this.concept.examples.push(example);
         this.showExampleConstructor = false;
     }

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   th: {
   },
   name: {
-    textAlign: 'center',
+    // textAlign: 'center',
     padding: '4px',
     fontSize: '16px',
     color: 'rgb(66, 103, 178)',
@@ -39,13 +39,18 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   scroll: {
-    maxHeight: '200px',
+    // maxHeight: '200px',
     overflow: 'auto',
     borderRadius: '5px',
     border: '1px solid rgb(41, 72, 125)',
   },
   td: {
+    textAlign: 'left',
     padding: '14px',
+    whiteSpace: 'pre',
+  },
+  text: {
+    display: 'inline-block',
   },
 });
 
@@ -71,7 +76,11 @@ const List = ({ columns, rows: items, onClick }: Props) =>
             items.map((row, index) =>
               <tr key={index} onClick={() => onClick(row)} className={css(styles.item)}>
                 {
-                  row.map((item, id) => <td className={css(styles.td)} key={`${index}-${id}`} >{item}</td>)
+                  row.map((item, id) => <td className={css(styles.td)} key={`${index}-${id}`}>
+                    <div className={css(styles.text)} >
+                      {item}
+                    </div>
+                  </td>)
                 }
               </tr>
             )
