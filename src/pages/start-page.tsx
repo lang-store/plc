@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import Main from '../components/main';
 import { Dragonet } from '../logic/dragonet';
+import Blizzard from '../components/tools/blizzard';
 
 
 const styles = StyleSheet.create({
@@ -10,9 +11,12 @@ const styles = StyleSheet.create({
 });
 
 function StartPage() {
+    const dragonet = useMemo(() => new Dragonet(), []);
     return (
         <div className={css(styles.main)}>
-            <Main dragonet={new Dragonet()} />
+            <Blizzard mainRef={dragonet.blizzard.ref} />
+            <Main dragonet={dragonet} />
+
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import Label from '../../tools/label';
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  languages: JsonStory[];
   frame: InfoFrame;
 }
 
@@ -36,11 +35,15 @@ const abstract = `Programming Language Markup (PLM) является часть�
 экспертных оценок возможностей языков программирования (ЯП). В данной системе сконцетрированы представления
 наиболее важных по мнению авторов языков программирования.`;
 
-function Info({ languages, frame }: Props) {
+function Info({ frame }: Props) {
   const { dragonet } = frame;
   const { frameLord } = dragonet;
 
   const markupMeta = new MarkupMeta();
+
+  useEffect(() => {
+    dragonet.blizzard.doInBackground(dragonet.refreshData)();
+  }, []);
 
   return (
     <div className={css(styles.info)}>

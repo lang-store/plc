@@ -37,7 +37,7 @@ function Main({ dragonet }: Props) {
     }
 
     if (frame instanceof InfoFrame) {
-      return <InfoComponent frame={frame} languages={frame.languages} />;
+      return <InfoComponent frame={frame} />;
     }
 
     if (frame instanceof InitMarkupFrame) {

@@ -3,6 +3,7 @@ import { observable, action, } from 'mobx';
 import { Language } from '../models/models';
 import { FrameLord } from './frame-lord';
 import { Api } from './api/api';
+import { Blizzard } from './spinner/blizzard';
 
 export class Dragonet {
     @observable languages: Language[] = [
@@ -35,6 +36,8 @@ export class Dragonet {
             ]
         },
     ];
+
+    @observable blizzard = new Blizzard();
 
     @observable api = new Api();
 
