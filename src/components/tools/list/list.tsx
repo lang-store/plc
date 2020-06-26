@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   scroll: {
-    // maxHeight: '200px',
     overflow: 'auto',
     borderRadius: '5px',
     border: '1px solid rgb(41, 72, 125)',
