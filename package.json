@@ -10,14 +10,19 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/react-syntax-highlighter": "^11.0.4",
+    "ace-builds": "^1.4.11",
     "aphrodite": "^2.4.0",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "mobx-react-lite": "^2.0.7",
     "react": "^16.9.23",
+    "react-ace": "^9.1.1",
+    "react-codemirror2": "^7.2.1",
     "react-dom": "^16.9.23",
     "react-google-charts": "^3.0.15",
-    "react-hot-loader": "^4.12.20"
+    "react-hot-loader": "^4.12.20",
+    "react-syntax-highlighter": "^12.2.1"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^16.9.23",

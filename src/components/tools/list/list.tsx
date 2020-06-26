@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
+  langName?: string;
   columns: string[];
   rows: string[][];
   onClick: (row: string[]) => void;

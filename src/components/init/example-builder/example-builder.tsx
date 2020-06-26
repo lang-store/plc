@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import Ok from '../../tools/ok';
-import Cancel from '../../tools/cancel';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { github } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-java';
+import 'ace-builds/src-noconflict/theme-github';
+
 import { ConceptExample } from '../../../models/models';
 import Button from '../../tools/button';
 
@@ -49,11 +54,21 @@ const ExampleBuilder = ({ conceptExample, onOk, onCancel, onDelete }: Props) => 
         <tr>
           <th className={css(styles.name, styles.th)}>Пример</th>
           <th className={css(styles.th)}>
-            <textarea
-              defaultValue={example}
-              className={css(styles.input)}
-              onChange={(e) => setExample(e.target.value)}
-            />
+            {/* <SyntaxHighlighter language="java" style={github}>
+              <textarea
+                defaultValue={example}
+                className={css(styles.input)}
+                onChange={(e) => setExample(e.target.value)}
+              />
+            </SyntaxHighlighter> */
+              <AceEditor
+                mode="java"
+                theme="github"
+                defaultValue={example}
+                onChange={(v) => setExample(v)}
+                name="UNIQUE_ID_OF_DIV"
+                editorProps={{ $blockScrolling: true }}
+              />}
           </th>
         </tr>
         <tr>
