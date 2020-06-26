@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     boxShadow: '0.2em 0em 15px rgba(122,122,122,0.7)',
   },
   input: {
-    minWidth: '250px',
-    minHeight: '30px',
+    minWidth: '450px',
+    minHeight: '150px',
     padding: '0',
     borderRadius: '5px',
     border: '1px solid rgb(66, 103, 178)'
@@ -69,10 +69,16 @@ const ExampleBuilder = ({ conceptExample, onOk, onCancel, onDelete }: Props) => 
 
         <tr>
           <th className={css(styles.th)}>
-            <Ok onClick={() => onOk({ id: conceptExample.id, example, notes, conceptId: conceptExample.conceptId })} />
+            <Button
+              name={'Сохранить'}
+              onClick={() => onOk({ id: conceptExample.id, example, notes, conceptId: conceptExample.conceptId })}
+            />
           </th>
           <th className={css(styles.th)}>
-            <Cancel onClick={onCancel} />
+            <Button
+              name={'Отменить'}
+              onClick={onCancel}
+            />
           </th>
           {
             conceptExample.id && <th className={css(styles.th)}>

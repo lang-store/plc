@@ -51,7 +51,6 @@ function Info({ frame }: Props) {
       <Text text={abstract} />
 
       <div className={css(styles.compare)}>
-        <Button onClick={() => dragonet.refreshData()} name={`Обновить данные`} />
         <Button onClick={() => frameLord.openMarkupFrame()} name={`Добавить разметку`} />
         <Button onClick={() => frameLord.openCompareFrame()} name={`Сравнить языки программирования`} />
         <Button onClick={() => frameLord.openComparisonFrame()} name={`Сравнить языки программирования 2.0`} />
