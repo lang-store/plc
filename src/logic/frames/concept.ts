@@ -30,6 +30,10 @@ export class ConceptFrame extends Frame {
     @action.bound openExampleConstructor = () => this.showExampleConstructor = true;
 
     @action.bound openExampleEditor = (id: number) => {
+        if (this.showExampleEditor) {
+            return;
+        }
+
         this.showExampleEditor = true;
         this.editId = id;
     }

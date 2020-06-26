@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import AceEditor from 'react-ace';
@@ -11,6 +11,10 @@ import Button from '../../tools/button';
 
 const styles = StyleSheet.create({
   th: {
+    paddint: '10px',
+  },
+  action: {
+    minWidth: '300px',
   },
   name: {
     textAlign: 'left',
@@ -51,6 +55,17 @@ const ExampleBuilder = ({ conceptExample, onOk, onCancel, onDelete }: Props) => 
     <table className={css(styles.table)}>
       <tbody>
         <tr>
+          <th className={css(styles.name, styles.th)}>Примечание</th>
+          <th className={css(styles.th)}>
+            <textarea
+              defaultValue={notes}
+              className={css(styles.input)}
+              onChange={(e) => setNotes(e.target.value)}
+            />
+          </th>
+        </tr>
+
+        <tr>
           <th className={css(styles.name, styles.th)}>Пример</th>
           <th className={css(styles.th)}>
             <AceEditor
@@ -63,32 +78,22 @@ const ExampleBuilder = ({ conceptExample, onOk, onCancel, onDelete }: Props) => 
             />
           </th>
         </tr>
-        <tr>
-          <th className={css(styles.name, styles.th)}>Примечание</th>
-          <th className={css(styles.th)}>
-            <textarea
-              defaultValue={notes}
-              className={css(styles.input)}
-              onChange={(e) => setNotes(e.target.value)}
-            />
-          </th>
-        </tr>
 
         <tr>
-          <th className={css(styles.th)}>
+          <th className={css(styles.action)}>
             <Button
               name={'Сохранить'}
               onClick={() => onOk({ id: conceptExample.id, example, notes, conceptId: conceptExample.conceptId })}
             />
           </th>
-          <th className={css(styles.th)}>
+          <th className={css(styles.action)}>
             <Button
               name={'Отменить'}
               onClick={onCancel}
             />
           </th>
           {
-            conceptExample.id && <th className={css(styles.th)}>
+            conceptExample.id && <th className={css(styles.action)}>
               <Button
                 name={'Удалить пример'}
                 onClick={onDelete}

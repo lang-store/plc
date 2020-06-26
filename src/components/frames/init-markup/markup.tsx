@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: 'rgb(66, 103, 178)',
   },
   name: {
-    textAlign: 'left',
+    textAlign: 'right',
     padding: '4px',
     fontSize: '16px',
     color: 'rgb(66, 103, 178)',
