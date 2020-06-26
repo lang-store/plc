@@ -123,7 +123,7 @@ function Markup({ frame, onSave }: Props) {
               concept.examples.length.toString()
             ])
           }
-          onClick={(row) => frameLord.openConceptFrame(language.concepts.find(concept => concept.name === row[0]))}
+          onClick={(row) => frameLord.openConceptFrame(language.concepts.find(concept => concept.name === row[0]), language.name)}
         />
 
         {

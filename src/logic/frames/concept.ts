@@ -9,7 +9,7 @@ export class ConceptFrame extends Frame {
 
     @observable editId: number;
 
-    constructor(dragonet: Dragonet, concept: Concept) {
+    constructor(dragonet: Dragonet, concept: Concept, readonly langName: string) {
         super(dragonet);
         this.concept = concept;
     }

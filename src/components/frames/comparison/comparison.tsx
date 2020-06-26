@@ -91,7 +91,7 @@ function ComparisonComponent({ frame }: Props) {
       <List
         columns={[...languages.map(language => `Понятие ${language.name}`), ...languages.map(language => `Примеры ${language.name}`)]}
         rows={showConcepts}
-        onClick={(row) => frameLord.openConceptFrame(languages[0].concepts.find(concept => concept.name === row[0]))}
+        onClick={(row) => frameLord.openConceptFrame(languages[0].concepts.find(concept => concept.name === row[0]), languages[0].name)}
       />
 
     </Fragment>

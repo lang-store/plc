@@ -23,7 +23,7 @@ export class FrameLord {
     openMarkupFrame = (language?: Language) => this.frames.push(new InitMarkupFrame(this.dragonet, language))
 
     @action.bound
-    openConceptFrame = (concept: Concept) => this.frames.push(new ConceptFrame(this.dragonet, concept))
+    openConceptFrame = (concept: Concept, langName: string) => this.frames.push(new ConceptFrame(this.dragonet, concept, langName))
 
     @action.bound
     openComparisonFrame = () => this.frames.push(new ComparisonFrame(this.dragonet, this.dragonet.languages))

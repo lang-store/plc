@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { observer } from 'mobx-react-lite';
 
 import { Concept } from '../../../models/models';
 import Card from '../../tools/card';
@@ -7,8 +8,9 @@ import List from '../../tools/list';
 import Add from '../../tools/add';
 import ExampleBuilder from '../../init/example-builder';
 import { ConceptFrame } from '../../../logic/frames';
-import { observer } from 'mobx-react-lite';
 import Button from '../../tools/button';
+
+import CodeTable from '../../tools/code-table';
 
 const styles = StyleSheet.create({
   compare: {
@@ -57,10 +59,10 @@ const styles = StyleSheet.create({
 
 interface Props {
   frame: ConceptFrame;
-  concept: Concept;
 }
 
 function ConceptPage({ frame }: Props) {
+  const { langName } = frame;
   const { blizzard, frameLord } = frame.dragonet;
 
   return (
@@ -88,6 +90,7 @@ function ConceptPage({ frame }: Props) {
           frame.showExampleConstructor &&
           <div className={css(styles.example)}>
             <ExampleBuilder
+              langName={langName}
               conceptExample={{ notes: '', example: '' }}
               onOk={(example) => frame.doneExample(example)}
               onCancel={frame.cancelExample}
@@ -99,6 +102,7 @@ function ConceptPage({ frame }: Props) {
           frame.showExampleEditor &&
           <div className={css(styles.example)}>
             <ExampleBuilder
+              langName={langName}
               conceptExample={frame.concept.examples[frame.editId]}
               onOk={async (example) => {
                 await frame.updateExample(example);
@@ -123,11 +127,9 @@ function ConceptPage({ frame }: Props) {
           </div>
         }
 
-        <List
-          columns={['Пример', 'Примечание']}
-          rows={
-            frame.concept.examples.map(example => [example.example, example.notes])
-          }
+        <CodeTable
+          langName={langName}
+          examples={frame.concept.examples}
           onClick={(row) => { }}
           onDoubleClick={frame.openExampleEditor}
         />
