@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import { InitMarkupFrame } from '../../../logic/frames';
@@ -63,9 +63,13 @@ interface Props {
 }
 
 function Markup({ frame, onSave }: Props) {
-  const { language } = frame;
-  const { frameLord } = frame.dragonet;
+  const { language, dragonet } = frame;
+  const { frameLord, blizzard } = dragonet;
   const markupMeta = new MarkupMeta();
+
+  useEffect(() => {
+    blizzard.doInBackground(frame.refreshLanguage)();
+  }, []);
 
   return (
     <div className={css(styles.info)}>
@@ -81,7 +85,7 @@ function Markup({ frame, onSave }: Props) {
                   defaultValue={language.name}
                   className={css(styles.input)}
                   onChange={(e) => frame.saveLocalName(e.target.value)}
-                  onBlur={frame.saveLanguage}
+                  onBlur={frame.updateLanguage}
                 />
               </th>
             </tr>
@@ -123,16 +127,27 @@ function Markup({ frame, onSave }: Props) {
         />
 
         {
-          !frame.isRewrite && <div className={css(styles.compare, styles.action)}>
-            <Button
-              name={'Сохранить'}
-              onClick={() => {
-                onSave({ name: language.name, concepts: language.concepts });
-                frameLord.removeLastFrame();
-              }}
-            />
-            <Button name={'Отмена'} onClick={() => frameLord.removeLastFrame()} />
-          </div>
+          !frame.isRewrite ?
+            <div className={css(styles.compare, styles.action)}>
+              <Button
+                name={'Сохранить'}
+                onClick={async () => {
+                  await blizzard.doInBackground(frame.saveNewLanguage)();
+                  frameLord.removeLastFrame();
+                }}
+              />
+              <Button name={'Отмена'} onClick={() => frameLord.removeLastFrame()} />
+            </div>
+            :
+            <div className={css(styles.compare, styles.action)}>
+              <Button
+                name={'Удалить разметку'}
+                onClick={async () => {
+                  await blizzard.doInBackground(frame.deleteLanguage)();
+                  frameLord.removeLastFrame();
+                }}
+              />
+            </div>
         }
       </Card>
 

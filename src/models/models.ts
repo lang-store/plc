@@ -21,7 +21,7 @@ export interface JsonStory {
 export interface Language {
     id?: number;
     name: string;
-    concepts: Concept[];
+    concepts?: Concept[];
 }
 
 export interface ConceptExample {
@@ -37,7 +37,7 @@ export interface Concept {
     name: string;
     category: string;
     method: string;
-    examples: ConceptExample[];
+    examples?: ConceptExample[];
 }
 
 export class Frame {

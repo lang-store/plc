@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Ok from '../../tools/ok';
 import Cancel from '../../tools/cancel';
 import { ConceptExample } from '../../../models/models';
+import Button from '../../tools/button';
 
 const styles = StyleSheet.create({
   th: {
@@ -31,14 +32,16 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  onOk: (concept: ConceptExample) => void;
+  conceptExample: ConceptExample;
+  onOk: (example: ConceptExample) => void;
   onCancel: () => void;
+  onDelete?: () => void;
 }
 
 
-const ExampleBuilder = ({ onOk, onCancel }: Props) => {
-  const [example, setExample] = useState('');
-  const [notes, setNotes] = useState('');
+const ExampleBuilder = ({ conceptExample, onOk, onCancel, onDelete }: Props) => {
+  const [example, setExample] = useState(conceptExample.example);
+  const [notes, setNotes] = useState(conceptExample.notes);
 
   return (
     <table className={css(styles.table)}>
@@ -46,23 +49,39 @@ const ExampleBuilder = ({ onOk, onCancel }: Props) => {
         <tr>
           <th className={css(styles.name, styles.th)}>Пример</th>
           <th className={css(styles.th)}>
-            <textarea className={css(styles.input)} onChange={(e) => setExample(e.target.value)} />
+            <textarea
+              defaultValue={example}
+              className={css(styles.input)}
+              onChange={(e) => setExample(e.target.value)}
+            />
           </th>
         </tr>
         <tr>
           <th className={css(styles.name, styles.th)}>Примечание</th>
           <th className={css(styles.th)}>
-            <textarea className={css(styles.input)} onChange={(e) => setNotes(e.target.value)} />
+            <textarea
+              defaultValue={notes}
+              className={css(styles.input)}
+              onChange={(e) => setNotes(e.target.value)}
+            />
           </th>
         </tr>
 
         <tr>
           <th className={css(styles.th)}>
-            <Ok onClick={() => onOk({ example, notes })} />
+            <Ok onClick={() => onOk({ id: conceptExample.id, example, notes, conceptId: conceptExample.conceptId })} />
           </th>
           <th className={css(styles.th)}>
             <Cancel onClick={onCancel} />
           </th>
+          {
+            conceptExample.id && <th className={css(styles.th)}>
+              <Button
+                name={'Удалить пример'}
+                onClick={onDelete}
+              />
+            </th>
+          }
         </tr>
       </tbody>
     </table>

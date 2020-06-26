@@ -41,6 +41,14 @@ export class InitMarkupFrame extends Frame {
             this.selectedCodes.find(sel => sel.categoryCode === concept.category && sel.methodCode === concept.method));
     }
 
+    @action.bound refreshLanguage = async () => {
+        if (!this.isRewrite) {
+            return;
+        }
+
+        const { api } = this.dragonet;
+        this.language = await api.getLanguage(this.language.id);
+    }
 
     @action.bound addSelectedCode = (categoryCode: string, methodCode: string) => {
         const length = this.selectedCodes.length;
@@ -56,17 +64,37 @@ export class InitMarkupFrame extends Frame {
 
     @action.bound openConceptConstructor = () => this.showInitConcept = true;
 
-    @action.bound async saveLanguage() {
+    @action.bound async updateLanguage() {
+        if (!this.isRewrite) {
+            return;
+        }
+
         const { blizzard, api } = this.dragonet;
         await blizzard.doInBackground(api.putLanguage)(this.language);
     }
 
+    @action.bound async saveNewLanguage() {
+        const { api } = this.dragonet;
+        const lang = await api.postLanguage({ name: this.language.name });
+
+        for (const { name, category, method, examples } of this.language.concepts) {
+            const savedContcept = await api.postConcept({ languageId: lang.id, name, category, method });
+
+            for (const { example, notes } of examples) {
+                await api.postExample({ conceptId: savedContcept.id, example, notes });
+            }
+        }
+    }
+
+    @action.bound deleteLanguage = async () => await this.dragonet.api.deleteLanguage(this.language.id);
+
     @action.bound async doneConcept(concept: Concept) {
         const { blizzard, api } = this.dragonet;
-
         concept.languageId = this.language.id;
 
-        await blizzard.doInBackground(api.pushConcept)(concept);
+        if (this.isRewrite) {
+            await blizzard.doInBackground(api.postConcept)(concept);
+        }
 
         this.language.concepts.push(concept);
         this.showInitConcept = false;

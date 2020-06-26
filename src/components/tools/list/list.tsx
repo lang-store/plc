@@ -58,9 +58,10 @@ interface Props {
   columns: string[];
   rows: string[][];
   onClick: (row: string[]) => void;
+  onDoubleClick?: (id: number) => void;
 }
 
-const List = ({ columns, rows: items, onClick }: Props) =>
+const List = ({ columns, rows: items, onClick, onDoubleClick }: Props) =>
   <div className={css(styles.main)}>
     <div className={css(styles.scroll)}>
       <table className={css(styles.table)}>
@@ -74,7 +75,12 @@ const List = ({ columns, rows: items, onClick }: Props) =>
         <tbody>
           {
             items.map((row, index) =>
-              <tr key={index} onClick={() => onClick(row)} className={css(styles.item)}>
+              <tr
+                key={index}
+                onClick={() => onClick(row)}
+                onDoubleClick={() => onDoubleClick && onDoubleClick(index)}
+                className={css(styles.item)}
+              >
                 {
                   row.map((item, id) => <td className={css(styles.td)} key={`${index}-${id}`}>
                     <div className={css(styles.text)} >

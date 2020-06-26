@@ -8,6 +8,7 @@ import Add from '../../tools/add';
 import ExampleBuilder from '../../init/example-builder';
 import { ConceptFrame } from '../../../logic/frames';
 import { observer } from 'mobx-react-lite';
+import Button from '../../tools/button';
 
 const styles = StyleSheet.create({
   compare: {
@@ -59,7 +60,8 @@ interface Props {
   concept: Concept;
 }
 
-function ConceptPage({ frame, concept }: Props) {
+function ConceptPage({ frame }: Props) {
+  const { blizzard, frameLord } = frame.dragonet;
 
   return (
     <div className={css(styles.info)}>
@@ -72,7 +74,7 @@ function ConceptPage({ frame, concept }: Props) {
               <th className={css(styles.name)}>Наименование</th>
               <th>
                 <input
-                  defaultValue={concept.name}
+                  defaultValue={frame.concept.name}
                   className={css(styles.input)}
                   onChange={(e) => frame.saveLocalName(e.target.value)}
                   onBlur={frame.saveConcept}
@@ -85,12 +87,36 @@ function ConceptPage({ frame, concept }: Props) {
         {
           frame.showExampleConstructor &&
           <div className={css(styles.example)}>
-            <ExampleBuilder onOk={(example) => frame.doneExample(example)} onCancel={frame.cancelExample} />
+            <ExampleBuilder
+              conceptExample={{ notes: '', example: '' }}
+              onOk={(example) => frame.doneExample(example)}
+              onCancel={frame.cancelExample}
+            />
           </div>
         }
 
         {
-          !frame.showExampleConstructor &&
+          frame.showExampleEditor &&
+          <div className={css(styles.example)}>
+            <ExampleBuilder
+              conceptExample={frame.concept.examples[frame.editId]}
+              onOk={async (example) => {
+                await frame.updateExample(example);
+                await frame.refreshConcept();
+              }}
+              onCancel={frame.cancelEditor}
+              onDelete={async () => {
+                frame.cancelEditor();
+                const example = frame.concept.examples[frame.editId];
+                await frame.deleteExample(example.id);
+                await frame.refreshConcept();
+              }}
+            />
+          </div>
+        }
+
+        {
+          !frame.showConstruct &&
           <div className={css(styles.compare)}>
             <Add onClick={frame.openExampleConstructor} />
             <span className={css(styles.name)}>Добавить пример</span>
@@ -103,7 +129,18 @@ function ConceptPage({ frame, concept }: Props) {
             frame.concept.examples.map(example => [example.example, example.notes])
           }
           onClick={(row) => { }}
+          onDoubleClick={frame.openExampleEditor}
         />
+
+        <div className={css(styles.compare, styles.action)}>
+          <Button
+            name={'Удалить понятие'}
+            onClick={async () => {
+              await blizzard.doInBackground(frame.deleteConcept)();
+              frameLord.removeLastFrame();
+            }}
+          />
+        </div>
       </Card>
 
     </div>
