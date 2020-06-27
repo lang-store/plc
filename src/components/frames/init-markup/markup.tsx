@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { observer } from 'mobx-react-lite';
 
 import { InitMarkupFrame } from '../../../logic/frames';
 import Card from '../../tools/card';
@@ -7,10 +8,11 @@ import ConceptBuilder from '../../init/concept-builder';
 import List from '../../tools/list';
 import Button from '../../tools/button';
 import Add from '../../tools/add';
-import { observer } from 'mobx-react-lite';
 import { Language } from '../../../models/models';
 import Matrix from '../../tools/matrix';
 import { MarkupMeta } from '../../../logic/language/meta';
+import Cancel from '../../tools/cancel';
+import { MATRIX_EXPLANATION } from '../../../models/metadata';
 
 const styles = StyleSheet.create({
   compare: {
@@ -54,7 +56,26 @@ const styles = StyleSheet.create({
   },
   action: {
     justifyContent: 'center',
-  }
+  },
+  item: {
+    width: '100px',
+    wordWrap: 'break-word',
+    transition: '0.5s',
+    ':hover': {
+      background: 'rgb(41, 72, 125)',
+      color: 'rgb(255,255,255)',
+    },
+  },
+  td: {
+    textAlign: 'left',
+    padding: '14px',
+  },
+  th: {
+    textAlign: 'center',
+    padding: '4px',
+    fontSize: '16px',
+    color: 'rgb(66, 103, 178)',
+  },
 });
 
 interface Props {
@@ -91,6 +112,47 @@ function Markup({ frame, onSave }: Props) {
             </tr>
           </tbody>
         </table>
+        {
+          !frame.showExplanation ?
+            <div className={css(styles.compare)}>
+              <Add onClick={frame.showExplanationList} />
+              <span className={css(styles.name)}>Открыть памятку</span>
+            </div>
+            :
+            <div className={css(styles.compare)}>
+              <Cancel onClick={frame.hideExplanationList} />
+              <span className={css(styles.name)}>Закрыть памятку</span>
+            </div>
+        }
+
+        {
+          frame.showExplanation &&
+          <table className={css(styles.table)}>
+            <thead>
+              <tr>
+                <th className={css(styles.th)}>№ позиции</th>
+                <th className={css(styles.th)}>Пояснение</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                MATRIX_EXPLANATION.map((exp, index) =>
+                  <tr
+                    key={index}
+                    className={css(styles.item)}
+                  >
+                    <td className={css(styles.td)}>
+                      {exp.code}
+                    </td>
+                    <td className={css(styles.td)}>
+                      {exp.explanation}
+                    </td>
+                  </tr>
+                )
+              }
+            </tbody>
+          </table>
+        }
 
         <Matrix
           languages={[frame.language]}

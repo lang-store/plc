@@ -15,6 +15,7 @@ export class InitMarkupFrame extends Frame {
 
     @observable selectedCodes: CodeSelect[] = [];
     @observable showInitConcept = false;
+    @observable showExplanation = false;
     @observable isRewrite = false;
 
     constructor(dragonet: Dragonet, language?: Language) {
@@ -60,9 +61,14 @@ export class InitMarkupFrame extends Frame {
         }
     }
 
+    @action.bound openConceptConstructor = () => this.showInitConcept = true;
+
+
     @action.bound saveLocalName = (name: string) => this.language.name = name;
 
-    @action.bound openConceptConstructor = () => this.showInitConcept = true;
+    @action.bound showExplanationList = () => this.showExplanation = true;
+
+    @action.bound hideExplanationList = () => this.showExplanation = false;
 
     @action.bound async updateLanguage() {
         if (!this.isRewrite) {
@@ -96,7 +102,7 @@ export class InitMarkupFrame extends Frame {
             await blizzard.doInBackground(api.postConcept)(concept);
         }
 
-        this.language.concepts.push(concept);
+        await blizzard.doInBackground(this.refreshLanguage)();
         this.showInitConcept = false;
     }
 

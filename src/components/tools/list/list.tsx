@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   th: {
   },
   name: {
-    // textAlign: 'center',
     padding: '4px',
     fontSize: '16px',
     color: 'rgb(66, 103, 178)',
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     padding: '14px',
     whiteSpace: 'pre',
   },
-  text: {
+  text: { 
     display: 'inline-block',
   },
 });

@@ -54,8 +54,8 @@ export class ComparisonFrame extends Frame {
 
         for (let i = 0; i < maxSize; i++) {
             showConcepts.push([
-                ...concepts.map(conceptArray => conceptArray[i].name),
-                ...concepts.map(conceptArray => conceptArray[i].examples.length.toString())
+                ...concepts.map(conceptArray => conceptArray[i] && conceptArray[i].name),
+                ...concepts.map(conceptArray => conceptArray[i] && conceptArray[i].examples.length.toString())
             ]);
         }
         return showConcepts;

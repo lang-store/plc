@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     th: {
     },
     name: {
-        // textAlign: 'center',
         padding: '4px',
         fontSize: '16px',
         color: 'rgb(66, 103, 178)',
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
         maxWidth: '400px',
         textAlign: 'left',
         padding: '14px',
-        whiteSpace: 'pre',
         overflow: 'auto'
     },
     text: {
