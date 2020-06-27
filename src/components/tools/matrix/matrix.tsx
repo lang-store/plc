@@ -54,39 +54,39 @@ const styles = StyleSheet.create({
   },
 });
 interface Cell {
-  rowIndex: number;
-  columnIndex: number;
+  categoryCode: string;
+  methodCode: string;
 }
 
 interface Props {
   languages: Language[];
+  selectedCells: Cell[];
   onCellClick: (categoryCode: string, methodCode: string) => void;
   highlightByClick?: boolean;
 }
 
-function Matrix({ languages, highlightByClick, onCellClick }: Props) {
+function Matrix({ languages, selectedCells, highlightByClick, onCellClick }: Props) {
   const markupMeta = new MarkupMeta();
-  const [selectedCells, setSelectedCells] = useState<Cell[]>([]);
 
-  const selectedColor = (rowIndex: number, columnIndex: number) => {
-    if (selectedCells.find(cell => cell.rowIndex === rowIndex && cell.columnIndex === columnIndex)) {
+  const selectedColor = (category: string, method: string) => {
+    if (selectedCells.find(cell => cell.categoryCode === category && cell.methodCode === method)) {
       return { background: 'rgb(0, 153, 116)', opacity: '0.7', };
     }
 
     return {};
   };
 
-  const onClickCell = (rowIndex: number, columnIndex: number) => {
-    if (!highlightByClick) {
-      return;
-    }
+  // const onClickCell = (category: string, method: string) => {
+  //   if (!highlightByClick) {
+  //     return;
+  //   }
 
-    if (selectedCells.some(cell => cell.rowIndex === rowIndex && cell.columnIndex === columnIndex)) {
-      setSelectedCells([...selectedCells.filter(cell => !(cell.rowIndex === rowIndex && cell.columnIndex === columnIndex))]);
-    } else {
-      setSelectedCells([...selectedCells, { rowIndex, columnIndex }]);
-    }
-  };
+  //   if (selectedCells.some(cell => cell.category === category && cell.method === method)) {
+  //     setSelectedCells([...selectedCells.filter(cell => !(cell.rowIndex === rowIndex && cell.columnIndex === columnIndex))]);
+  //   } else {
+  //     setSelectedCells([...selectedCells, { rowIndex, columnIndex }]);
+  //   }
+  // };
 
   const getConceptsLengthByCode = (category: string, method: string) => {
     return languages
@@ -119,11 +119,8 @@ function Matrix({ languages, highlightByClick, onCellClick }: Props) {
                       <div
                         key={`${method.code}-${index}`}
                         className={css(styles.cell)}
-                        style={selectedColor(rowIndex, index)}
-                        onClick={() => {
-                          onClickCell(rowIndex, index);
-                          onCellClick(category.code, method.code);
-                        }}
+                        style={selectedColor(category.code, method.code)}
+                        onClick={() => onCellClick(category.code, method.code)}
                       >
                         {getConceptsLengthByCode(category.code, method.code)}
                       </div>
