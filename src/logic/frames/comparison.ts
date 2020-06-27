@@ -47,15 +47,14 @@ export class ComparisonFrame extends Frame {
     }
 
     get conceptsToList() {
-        const concepts = this.languages.map(language => this.getСoncepts(language));
-        const maxSize = Math.max(...concepts.map(c => c.length));
+        const langConcepts = this.languages.map(language => this.getСoncepts(language));
+        const maxSize = Math.max(...langConcepts.map(c => c.length));
 
         const showConcepts = [];
 
         for (let i = 0; i < maxSize; i++) {
             showConcepts.push([
-                ...concepts.map(conceptArray => conceptArray[i] && conceptArray[i].name),
-                ...concepts.map(conceptArray => conceptArray[i] && conceptArray[i].examples.length.toString())
+                ...langConcepts.map(conceptArray => [conceptArray[i] && conceptArray[i].name, conceptArray[i] && conceptArray[i].examples.length.toString()]).flat(),
             ]);
         }
         return showConcepts;

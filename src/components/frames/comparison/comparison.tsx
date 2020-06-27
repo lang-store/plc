@@ -84,12 +84,13 @@ function ComparisonComponent({ frame }: Props) {
 
       <Matrix
         languages={languages}
+        selectedCells={frame.selectedCodes}
         onCellClick={frame.addSelectedCode}
         highlightByClick={true}
       />
 
       <List
-        columns={[...languages.map(language => `Понятие ${language.name}`), ...languages.map(language => `Примеры ${language.name}`)]}
+        columns={languages.map(language => [`Понятие ${language.name}`, `Примеры ${language.name}`]).flat()}
         rows={showConcepts}
         onClick={(row) => frameLord.openConceptFrame(languages[0].concepts.find(concept => concept.name === row[0]), languages[0].name)}
       />
