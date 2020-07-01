@@ -76,21 +76,9 @@ function Matrix({ languages, selectedCells, highlightByClick, onCellClick }: Pro
     return {};
   };
 
-  // const onClickCell = (category: string, method: string) => {
-  //   if (!highlightByClick) {
-  //     return;
-  //   }
-
-  //   if (selectedCells.some(cell => cell.category === category && cell.method === method)) {
-  //     setSelectedCells([...selectedCells.filter(cell => !(cell.rowIndex === rowIndex && cell.columnIndex === columnIndex))]);
-  //   } else {
-  //     setSelectedCells([...selectedCells, { rowIndex, columnIndex }]);
-  //   }
-  // };
-
   const getConceptsLengthByCode = (category: string, method: string) => {
     return languages
-      .map(language => language.concepts.filter(concept => concept.category === category && concept.method === method).length)
+      .map(language => language && language.concepts.filter(concept => concept.category === category && concept.method === method).length)
       .join('/');
   };
 
@@ -98,7 +86,7 @@ function Matrix({ languages, selectedCells, highlightByClick, onCellClick }: Pro
     <div className={css(styles.main)}>
       <div className={css(styles.container)}>
 
-        <span className={css(styles.title)}>{languages.map(language => language.name).join('/')}</span>
+        <span className={css(styles.title)}>{languages.map(language => language && language.name).join('/')}</span>
         <div className={css(styles.tbl)}>
 
           <div className={css(styles.row, styles.titleRow)}>

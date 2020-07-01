@@ -46,9 +46,9 @@ export class ComparisonFrame extends Frame {
         }
     }
 
-    get conceptsToList() {
-        const langConcepts = this.languages.map(language => this.getСoncepts(language));
-        const maxSize = Math.max(...langConcepts.map(c => c.length));
+    generateConceptsToList(lengs: Language[]) {
+        const langConcepts = lengs.map(language => language && this.getСoncepts(language));
+        const maxSize = Math.max(...langConcepts.map(c => c && c.length));
 
         const showConcepts = [];
 

@@ -7,6 +7,7 @@ import List from '../../tools/list';
 import { MarkupMeta } from '../../../logic/language/meta';
 import Matrix from '../../tools/matrix';
 import { observer } from 'mobx-react-lite';
+import SelectedTable from '../../tools/selected-table';
 
 const styles = StyleSheet.create({
   compare: {
@@ -49,13 +50,15 @@ function ComparisonComponent({ frame }: Props) {
   const { frameLord } = frame.dragonet;
   const markupMeta = new MarkupMeta();
 
-  const showConcepts = useMemo(() => frame.conceptsToList, [frame.conceptsToList, frame.selectedCodes.length]);
+  const [selectedRigth, selectRigth] = useState(-1);
+  const [selectedLeft, selectLeft] = useState(-1);
+  const showConcepts = useMemo(() => frame.generateConceptsToList([languages[selectedLeft], languages[selectedRigth]]), [selectedRigth, selectedLeft]);
 
   return (
     <Fragment>
 
       <div className={css(styles.compare)}>
-        <List
+        <SelectedTable
           columns={['Язык программирования', 'Категории', 'Методы', 'Число примеров']}
           rows={
             languages.map(language => [
@@ -65,10 +68,11 @@ function ComparisonComponent({ frame }: Props) {
               language.concepts.length.toString()
             ])
           }
-          onClick={(row) => { }}
+          onClick={selectLeft}
+          selectedRowId={selectedLeft}
         />
         <span className={css(styles.vs)}>VS</span>
-        <List
+        <SelectedTable
           columns={['Язык программирования', 'Категории', 'Методы', 'Число примеров']}
           rows={
             languages.map(language => [
@@ -78,19 +82,20 @@ function ComparisonComponent({ frame }: Props) {
               language.concepts.length.toString()
             ])
           }
-          onClick={(row) => { }}
+          onClick={selectRigth}
+          selectedRowId={selectedRigth}
         />
       </div>
 
       <Matrix
-        languages={languages}
+        languages={[languages[selectedLeft], languages[selectedRigth]]}
         selectedCells={frame.selectedCodes}
         onCellClick={frame.addSelectedCode}
         highlightByClick={true}
       />
 
       <List
-        columns={languages.map(language => [`Понятие ${language.name}`, `Примеры ${language.name}`]).flat()}
+        columns={[languages[selectedLeft], languages[selectedRigth]].map(language => language && [`Понятие ${language.name}`, `Примеры ${language.name}`]).flat()}
         rows={showConcepts}
         onClick={(row) => frameLord.openConceptFrame(languages[0].concepts.find(concept => concept.name === row[0]), languages[0].name)}
       />
