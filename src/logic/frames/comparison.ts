@@ -40,7 +40,7 @@ export class ComparisonFrame extends Frame {
         const length = this.selectedCodes.length;
         const tmp = this.selectedCodes.filter(sel => !(sel.categoryCode === categoryCode && sel.methodCode === methodCode));
         if (tmp.length === length) {
-            this.selectedCodes.push({ categoryCode, methodCode });
+            this.selectedCodes = [...this.selectedCodes, { categoryCode, methodCode }]
         } else {
             this.selectedCodes = tmp;
         }

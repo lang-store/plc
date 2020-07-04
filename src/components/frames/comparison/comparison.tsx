@@ -52,7 +52,7 @@ function ComparisonComponent({ frame }: Props) {
 
   const [selectedRigth, selectRigth] = useState(-1);
   const [selectedLeft, selectLeft] = useState(-1);
-  const showConcepts = useMemo(() => frame.generateConceptsToList([languages[selectedLeft], languages[selectedRigth]]), [selectedRigth, selectedLeft]);
+  const showConcepts = useMemo(() => frame.generateConceptsToList([languages[selectedLeft], languages[selectedRigth]]), [frame.selectedCodes, selectedRigth, selectedLeft]);
 
   return (
     <Fragment>
